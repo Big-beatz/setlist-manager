@@ -4,7 +4,10 @@ $red: #904547;
 $blue-shadow: 5px 7px #324253;
 $yellow-shadow: 5px 7px #837542;
 $red-shadow: 5px 7px #4f2627;
-$header-lining: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+$content-font: fahkwang, sans-serif;
+$fascinate: 'Fascinate', sans-serif;
+$header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
+$content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
 
 body {
@@ -32,7 +35,6 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
       }
 
 
@@ -43,6 +45,7 @@ body {
         box-shadow: $blue-shadow;
         position: relative;
         z-index: -1;
+        flex-direction: column;
       }
 
       .background--bottom {

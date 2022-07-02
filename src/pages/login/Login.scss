@@ -2,10 +2,13 @@
 $blue: #445A73;
 $yellow: #E3C569;
 $red: #904547;
-$blue-shadow: 5px 7px #394b60;
-$yellow-shadow: 5px 7px #baa55c;
-$red-shadow: 5px 10px #673133;
+$blue-shadow: 5px 7px #324253;
+$yellow-shadow: 5px 7px #837542;
+$red-shadow: 5px 7px #4f2627;
+$fahkwang: fahkwang, sans-serif;
+$fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
+$content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
   .setlist, .manager{
     color: $yellow;
@@ -13,3 +16,47 @@ $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
     font-size: xxx-large;
   }
 
+.login{
+  color: $blue;
+  text-shadow: $content-lining;
+  box-shadow: $yellow-shadow;
+  display: inline-block;
+  padding: 7px;
+  border: $blue solid 5px;
+  border-radius: 5px;
+  margin: 5% 10% 3%;
+}
+
+.loginForm {
+  font-family: $fascinate;
+  font-size: x-large;
+  color: $blue;
+  text-shadow: $content-lining;
+  box-shadow: $yellow-shadow;
+  border: $blue solid 5px;
+  border-radius: 7px;
+  padding: 7px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  margin-right: 30%;
+
+  input {
+    margin-right: 20%;
+    background-color: $blue;
+    opacity: 0.5;
+    border: black solid 1px;
+    border-radius: 7px
+  }
+}
+
+.registerButton{
+  font-family: $fascinate;
+  font-size: xx-large;
+  color: $yellow;
+  background-color: $red;
+  outline: none;
+  border: $yellow, solid, 5px;
+  border-radius: 7px;
+  box-shadow: $blue-shadow;
+}

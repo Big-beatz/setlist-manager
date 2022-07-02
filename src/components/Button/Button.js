@@ -1,9 +1,9 @@
 import React from 'react'
 import './Button.scss'
 
-function Button(children, className){
+function Button({children, className}){
     return(
-        <button type="button" disabled className={className}>{children}</button>
+        <button type="button" className={className}>{children}</button>
     )
 }
 
