@@ -1,9 +1,22 @@
 import React from 'react'
 import './Login.scss'
+import Background from "../../components/Background/Background";
 
 function Login(){
     return (
-        <h1>Login</h1>
+        <Background
+            top={
+                <>
+                    <h1 className="setlist">Setlist</h1>
+                    <h1 className="manager">Manager</h1>
+                </>
+            }
+            center={
+                <>
+                    <h2>Login</h2>
+                    <form action=""></form>
+                </>}
+        />
     )
 }
 
