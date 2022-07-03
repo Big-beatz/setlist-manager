@@ -10,24 +10,32 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
+
   .setlist, .manager{
     color: $yellow;
     text-shadow: $header-lining, $red-shadow;
     font-size: xxx-large;
-  }
+    }
 
-.login{
+
+.login__h2, .register-form__h2{
   color: $blue;
+  font-size: xx-large;
   text-shadow: $content-lining;
   box-shadow: $yellow-shadow;
+  margin: 5% 10% 3%;
   display: inline-block;
-  padding: 7px;
+  padding: 5px;
   border: $blue solid 5px;
   border-radius: 5px;
-  margin: 5% 10% 3%;
 }
 
-.loginForm {
+.register-form__h2{
+  font-size: x-large;
+  margin: 2% 10% 3%;
+}
+
+.loginForm, .register-form {
   font-family: $fascinate;
   font-size: x-large;
   color: $blue;
@@ -38,25 +46,65 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   padding: 7px;
   display: flex;
   flex-direction: column;
-  margin-left: 10%;
-  margin-right: 30%;
+  margin: 0 0 2% 10%;
+  width: 70%;
+  max-width: 700px;
 
   input {
-    margin-right: 20%;
+    width: 80%;
+    max-width: 500px;
     background-color: $blue;
-    opacity: 0.5;
+    opacity: 0.6;
     border: black solid 1px;
-    border-radius: 7px
+    border-radius: 7px;
+    flex-shrink: 1;
+    padding: 5px 0 5px 0;
+    color: white;
+    font-famiiy: $fahkwang;
+    font-size: x-large;
+    &:focus{
+      outline: none;
+      opacity: 0.7;
+    }}
+
   }
+
+
+  .loginForm__button, .register-form__button{
+    font-family: $fascinate;
+    text-shadow: $content-lining;
+    color: $yellow;
+    background-color: $red;
+    border: solid;
+    border-radius: 7px;
+    align-self: flex-end;
+    font-size: x-large;
+    margin: 2%;
+    width: 50%;
+    max-width: 250px;
+    &:hover{
+      background-color: $yellow;
+      color: $blue
+    }
 }
 
-.registerButton{
-  font-family: $fascinate;
-  font-size: xx-large;
-  color: $yellow;
-  background-color: $red;
-  outline: none;
-  border: $yellow, solid, 5px;
-  border-radius: 7px;
-  box-shadow: $blue-shadow;
+.background__bottom {
+  justify-content: flex-end;
+
+  .registerButton--cancel-register, .registerButton--start-register {
+    font-family: $fascinate;
+    color: $yellow;
+    background-color: $red;
+    outline: none;
+    border: solid;
+    border-radius: 7px;
+    font-size: xx-large;
+    box-shadow: $blue-shadow;
+    align-self: flex-end;
+    margin: 3% 10% 10% 3%;
+    &:hover {
+      background-color: $yellow;
+      color: $red;
+    }
+  }
 }

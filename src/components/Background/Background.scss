@@ -23,37 +23,44 @@ body {
     .background {
       height: 100%;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
 
-      .background--top {
+      .background__top {
         width: 100%;
-        height: 34%;
         background-color: $red;
         box-shadow: $yellow-shadow;
         position: relative;
-        z-index: 0;
+        z-index: 2;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        flex-grow: 1;
       }
 
 
-      .background--center {
+      .background__center {
         width: 100%;
-        height: 33%;
         background-color: $yellow;
         box-shadow: $blue-shadow;
         position: relative;
-        z-index: -1;
+        z-index: 1;
+        display: flex;
         flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
       }
 
-      .background--bottom {
+      .background__bottom {
         width: 100%;
-        height: 33%;
         background-color: $blue;
         position: relative;
-        z-index: -2;
+        z-index: 0;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
