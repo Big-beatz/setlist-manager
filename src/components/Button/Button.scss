@@ -4,5 +4,58 @@ $red: #904547;
 $blue-shadow: 5px 7px #324253;
 $yellow-shadow: 5px 7px #837542;
 $red-shadow: 5px 7px #4f2627;
-$content-font: fahkwang, sans-serif;
-$black-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
+$fahkwang: fahkwang, sans-serif;
+$fascinate: 'Fascinate', sans-serif;
+$header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
+$content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+.profile-button{
+  color: $yellow;
+  background-color: $red;
+  font-family: $fascinate;
+  font-size: 210%;
+  text-shadow: $content-lining;
+  box-shadow: $red-shadow;
+  display: inline-block;
+  padding: 5px;
+  border: $yellow solid 5px;
+  border-radius: 7px;
+  width: 60%;
+  &:hover{
+    background-color: $yellow;
+    color: $red;
+  }}
+
+.my-setlists-button{
+  color: $blue;
+  background-color: $yellow;
+  font-family: $fascinate;
+  font-size: 210%;
+  text-shadow: $content-lining;
+  box-shadow: $yellow-shadow;
+  display: inline-block;
+  padding: 5px;
+  border: $blue solid 5px;
+  border-radius: 7px;
+  width: 60%;
+  &:hover{
+    background-color: $blue;
+    color: $yellow;
+  }}
+
+.new-setlist-button{
+  color: $yellow;
+  background-color: $blue;
+  font-family: $fascinate;
+  font-size: 210%;
+  text-shadow: $content-lining;
+  box-shadow: $blue-shadow;
+  display: inline-block;
+  padding: 5px;
+  border: $yellow solid 5px;
+  border-radius: 7px;
+  width: 60%;
+  &:hover{
+    background-color: $yellow;
+    color: $blue;
+  }}

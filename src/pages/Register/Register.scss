@@ -10,28 +10,25 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
+.setlist, .manager{
+  color: $yellow;
+  text-shadow: $header-lining, $red-shadow;
+  font-size: xxx-large;
+}
 
-  .setlist, .manager{
-    color: $yellow;
-    text-shadow: $header-lining, $red-shadow;
-    font-size: xxx-large;
-    }
-
-
-.login__h2{
+.register-form__h2{
   color: $blue;
-  font-size: xx-large;
+  font-size: x-large;
   text-shadow: $content-lining;
   box-shadow: $yellow-shadow;
-  margin: 5% 10% 3%;
+  margin: 2% 10% 3%;
   display: inline-block;
   padding: 5px;
   border: $blue solid 5px;
   border-radius: 5px;
 }
 
-
-.loginForm {
+.register-form {
   font-family: $fascinate;
   font-size: x-large;
   color: $blue;
@@ -46,8 +43,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   width: 70%;
   max-width: 700px;
 
-
-  .loginForm__button {
+  .register-form__button {
     font-family: $fascinate;
     text-shadow: $content-lining;
     color: $yellow;
@@ -66,20 +62,22 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
   }
 }
-    .registerButton--start-register{
-      font-family: $fascinate;
-      color: $yellow;
-      background-color: $red;
-      outline: none;
-      border: solid;
-      border-radius: 7px;
-      font-size: xx-large;
-      box-shadow: $blue-shadow;
-      align-self: flex-end;
-      margin: 3% 10% 10% 3%;
 
-      &:hover {
-        background-color: $yellow;
-        color: $red;
+
+      .registerButton--cancel-register{
+        font-family: $fascinate;
+        color: $yellow;
+        background-color: $red;
+        outline: none;
+        border: solid;
+        border-radius: 7px;
+        font-size: xx-large;
+        box-shadow: $blue-shadow;
+        align-self: flex-end;
+        margin: 3% 10% 10% 3%;
+
+        &:hover {
+          background-color: $yellow;
+          color: $red;
+        }
       }
-    }

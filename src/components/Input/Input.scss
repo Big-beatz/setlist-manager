@@ -10,3 +10,19 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
+input {
+  width: 80%;
+  max-width: 500px;
+  background-color: $blue;
+  opacity: 0.6;
+  border: black solid 1px;
+  border-radius: 7px;
+  flex-shrink: 1;
+  padding: 5px 0 5px 0;
+  color: white;
+  font-famiiy: $fahkwang;
+  font-size: x-large;
+  &:focus{
+    outline: none;
+    opacity: 0.7;
+  }}
