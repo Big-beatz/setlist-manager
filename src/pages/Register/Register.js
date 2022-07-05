@@ -15,72 +15,78 @@ function Register(){
 
     return(
         <Background
-            top={
+            classNameTop="background-top"
+            classNameCenter="background-center"
+            classNameBottom="background-bottom"
+            topContent={
                 <>
                     <h1 className="setlist">Setlist</h1>
                     <h1 className="manager">Manager</h1>
                 < />
             }
-            center={<>
-                    <span>
-                        <h2 className="register-form__h2">
-                            Register
-                        </h2>
-                    </span>
-                <form
-                    className="register-form"
-                    onSubmit={handleSubmit}
-                >
-                    <label
-                        htmlFor="mailadres"
-                        id="mailadres"
-                    >
-                        E-mailadres
-                    </label>
-                    <input
-                        type="text"
-                        id="mailadres"
-                    />
-                    <label
-                        htmlFor="username"
-                        id="username"
-                    >
-                        Username
-                    </label>
-                    <input
-                        type="text"
-                        id="username"
-                    />
-                    <label
-                        htmlFor="password"
-                        id="password"
-                    >
-                        Password
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                    />
-                    <label
-                        htmlFor="password-again"
-                        id="password-again"
-                    >
-                        Password again
-                    </label>
-                    <input
-                        type="password"
-                        id="password-again"
-                    />
-                    <Button
-                        type="submit"
-                        className="register-form__button"
-                    >
-                        Finish
-                    </Button>
-                </form>
+            centerContent={
+                <>
+                    <div className="registerContainer">
+                            <span>
+                                <h2 className="register-form__h2">
+                                    Register
+                                </h2>
+                            </span>
+                        <form
+                            className="register-form"
+                            onSubmit={handleSubmit}
+                        >
+                            <label
+                                htmlFor="mailadres"
+                                id="mailadres"
+                            >
+                                E-mailadres
+                            </label>
+                            <input
+                                type="text"
+                                id="mailadres"
+                            />
+                            <label
+                                htmlFor="username"
+                                id="username"
+                            >
+                                Username
+                            </label>
+                            <input
+                                type="text"
+                                id="username"
+                            />
+                            <label
+                                htmlFor="password"
+                                id="password"
+                            >
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                            />
+                            <label
+                                htmlFor="password-again"
+                                id="password-again"
+                            >
+                                Password again
+                            </label>
+                            <input
+                                type="password"
+                                id="password-again"
+                            />
+                            <Button
+                                type="submit"
+                                className="register-form__button"
+                            >
+                                Finish
+                            </Button>
+                        </form>
+                    </div>
             </>
             }
-            bottom={
+            bottomContent={
                 <>
                     <Button
                         type="button"

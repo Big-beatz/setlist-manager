@@ -1,6 +1,5 @@
 import React from 'react'
 import './Button.scss'
-import {useNavigate} from 'react-router-dom'
 
 
 export function Button({children, className, type, onClick}){
@@ -14,41 +13,35 @@ export function Button({children, className, type, onClick}){
     )
 }
 
-export function ProfileButton(){
-    const navigate = useNavigate()
-
+export function ProfileButton({onClick}){
     return(
         <Button
         type="button"
         className="profile-button"
-        onClick={() => {navigate("/profile")}}
+        onClick={onClick}
     >
         Profile
     </Button>
     )
 }
 
-export function MySetlistsButton(){
-    const navigate = useNavigate()
-
+export function MySetlistsButton({onClick}){
     return(
         <Button
             type="button"
             className="my-setlists-button"
-            onClick={() => {navigate("/my-setlists")}}
+            onClick={onClick}
         >
             My Setlists
         </Button>
     )
 }
 
-export function NewSetlistButton(){
-    const navigate = useNavigate()
-
+export function NewSetlistButton({onClick}){
     return(
         <Button
             type="button"
-            onClick={() => {navigate("/new-setlist")}}
+            onClick={onClick}
             className="new-setlist-button"
         >
             New Setlist

@@ -16,63 +16,70 @@ function Login(){
 
     return (
         <Background
-            top={
+            classNameTop="background-top"
+            classNameCenter="background-center"
+            classNameBottom="background-bottom"
+            topContent={
                 <>
                     <h1 className="setlist">Setlist</h1>
                     <h1 className="manager">Manager</h1>
                 < />
             }
-            center={
+            centerContent={
                 <>
-                    <span className="login">
-                        <h2 className="login__h2">
-                            Login
-                        </h2>
-                    </span>
-                    <form
-                        action=""
-                        className="loginForm"
-                        onSubmit={handleSubmit}
-                    >
-                            <label htmlFor="" id="username">
-                                Username
-                            </label>
-                            <input
-                                type="text"
-                            />
-                            <label
-                                htmlFor="" id="password"
-                            >
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                            />
-                            <Button
-                            type="submit"
-                            className="loginForm__button"
-                            >
-                                <span className="loginButton__span">Login</span>
-                            </Button>
-                    </form>
-                < />
+                    <div className="loginContainer">
+                        <span className="login">
+                            <h2 className="login__h2">
+                                Login
+                            </h2>
+                        </span>
+                        <form
+                            action=""
+                            className="loginForm"
+                            onSubmit={handleSubmit}
+                        >
+                                <label htmlFor="" id="username">
+                                    Username
+                                </label>
+                                <input
+                                    type="text"
+                                />
+                                <label
+                                    htmlFor="" id="password"
+                                >
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                />
+                                <Button
+                                type="submit"
+                                className="loginForm__button"
+                                >
+                                    <span className="loginButton__span">
+                                        Login
+                                    </span>
+                                </Button>
+                        </form>
+                    </div>
+                </>
                     }
-                    bottom={
-                        <>
-                            <Button
-                                type="button"
-                                className="registerButton--start-register"
-                                onClick={() => {
-                                    navigate("/register")
-                                }}
-                            >
+                    bottomContent={
+                    <>
+                        <Button
+                            type="button"
+                            className="registerButton--start-register"
+                            onClick={() => {
+                                navigate("/register")
+                            }}
+                        >
                                 <span>
                                     Or Register
                                 </span>
-                            </Button>
-                        < />
-                    }
-                />
+                        </Button>
+                    </>
+                }
+                    />
             )
 }
 

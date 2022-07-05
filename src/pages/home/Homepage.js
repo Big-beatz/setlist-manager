@@ -1,21 +1,34 @@
 import './Homepage.scss'
 import Background from "../../components/Background/Background";
-import {Button, ProfileButton, MySetlistsButton, NewSetlistButton} from "../../components/Button/Button";
-import React, {useState} from 'react'
+import {ProfileButton, MySetlistsButton, NewSetlistButton} from "../../components/Button/Button";
+import React from 'react'
+import {useNavigate} from "react-router-dom";
 
 
 function Homepage(){
+    const navigate = useNavigate()
 
     return(
         <Background
-        top={
-            <ProfileButton />
+            classNameTop="background-top"
+            classNameCenter="background-center"
+            classNameBottom="background-bottom"
+        topContent={
+            <ProfileButton
+            onClick={() => {navigate("/profile")}}
+            />
         }
-        center={
-            <MySetlistsButton />
+        centerContent={
+            <MySetlistsButton
+                onClick={() => {navigate("/my-setlists")}}
+
+            />
         }
-        bottom={
-            <NewSetlistButton />
+        bottomContent={
+            <NewSetlistButton
+                onClick={() => {navigate("/new-setlist")}}
+
+            />
         }
         />
     )

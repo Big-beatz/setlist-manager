@@ -7,10 +7,12 @@ import MySetlists from "./pages/mySetlists/MySetlists";
 import NewSetlist from "./pages/newSetlist/NewSetlist";
 import Homepage from "./pages/home/Homepage";
 import Register from "./pages/Register/Register";
+import Navbar from "./components/Navbar/Navbar"
 
 function App() {
 
   return (
+      <>
           <Routes>
             <Route exact path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
@@ -20,6 +22,7 @@ function App() {
             <Route path="/my-setlists" element={<MySetlists />} />
             <Route path="/new-setlist" element={<NewSetlist />} />
           </Routes>
+      </>
   );
 }
 
