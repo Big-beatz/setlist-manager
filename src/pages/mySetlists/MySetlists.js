@@ -18,9 +18,53 @@ function MySetlists(){
                 />
             }
             centerContent={
+                <>
                 <MySetlistsButton
                     onClick={() => {navigate("/home")}}
                 />
+                    <ol className="setlists">
+                        <li>
+                            <section className="setlists--section">
+                                <h3>Setlist 1</h3>
+                                <ol>
+                                    <li>Song 1</li>
+                                    <li>Song 2</li>
+                                    <li>Song 3</li>
+                                </ol>
+                            </section>
+                        </li>
+                        <li>
+                            <section className="setlists--section">
+                                <h3>Setlist 1</h3>
+                                <ol>
+                                    <li>Song 1</li>
+                                    <li>Song 2</li>
+                                    <li>Song 3</li>
+                                </ol>
+                            </section>
+                        </li>
+                        <li>
+                            <section className="setlists--section">
+                                <h3>Setlist 1</h3>
+                                <ol>
+                                    <li>Song 1</li>
+                                    <li>Song 2</li>
+                                    <li>Song 3</li>
+                                </ol>
+                            </section>
+                        </li>
+                        <li>
+                            <section className="setlists--section">
+                                <h3>Setlist 1</h3>
+                                <ol>
+                                    <li>Song 1</li>
+                                    <li>Song 2</li>
+                                    <li>Song 3</li>
+                                </ol>
+                            </section>
+                        </li>
+                    </ol>
+                </>
             }
             bottomContent={
                 <NewSetlistButton

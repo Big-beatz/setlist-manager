@@ -42,6 +42,7 @@ function Login(){
                                     Username
                                 </label>
                                 <input
+                                    className="textInput"
                                     type="text"
                                 />
                                 <label
@@ -50,16 +51,14 @@ function Login(){
                                     Password
                                 </label>
                                 <input
+                                    className="textInput"
                                     type="password"
                                 />
                                 <Button
                                 type="submit"
                                 className="loginForm__button"
-                                >
-                                    <span className="loginButton__span">
-                                        Login
-                                    </span>
-                                </Button>
+                                buttonText="Login"
+                                />
                         </form>
                     </div>
                 </>
@@ -72,11 +71,8 @@ function Login(){
                             onClick={() => {
                                 navigate("/register")
                             }}
-                        >
-                                <span>
-                                    Or Register
-                                </span>
-                        </Button>
+                            buttonText="Or Register"
+                        />
                     </>
                 }
                     />

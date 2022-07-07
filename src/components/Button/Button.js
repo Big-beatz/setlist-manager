@@ -2,13 +2,14 @@ import React from 'react'
 import './Button.scss'
 
 
-export function Button({children, className, type, onClick}){
+export function Button({children, className, type, onClick, buttonText}){
     return(
         <button
             type={type}
             onClick={onClick}
-            className={className}>
-            <span>{children}</span>
+            className={className}
+           >
+            <span>{buttonText}</span>
         </button>
     )
 }
@@ -19,9 +20,8 @@ export function ProfileButton({onClick}){
         type="button"
         className="profile-button"
         onClick={onClick}
-    >
-        Profile
-    </Button>
+        buttonText="Profile"
+    />
     )
 }
 
@@ -31,9 +31,9 @@ export function MySetlistsButton({onClick}){
             type="button"
             className="my-setlists-button"
             onClick={onClick}
-        >
-            My Setlists
-        </Button>
+            buttonText="My setlists"
+        />
+
     )
 }
 
@@ -43,8 +43,7 @@ export function NewSetlistButton({onClick}){
             type="button"
             onClick={onClick}
             className="new-setlist-button"
-        >
-            New Setlist
-        </Button>
+            buttonText="New Setlist"
+        />
     )
 }

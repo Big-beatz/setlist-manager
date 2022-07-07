@@ -43,6 +43,7 @@ function Register(){
                                 E-mailadres
                             </label>
                             <input
+                                className="textInput"
                                 type="text"
                                 id="mailadres"
                             />
@@ -53,6 +54,7 @@ function Register(){
                                 Username
                             </label>
                             <input
+                                className="textInput"
                                 type="text"
                                 id="username"
                             />
@@ -63,6 +65,7 @@ function Register(){
                                 Password
                             </label>
                             <input
+                                className="textInput"
                                 type="password"
                                 id="password"
                             />
@@ -73,15 +76,15 @@ function Register(){
                                 Password again
                             </label>
                             <input
+                                className="textInput"
                                 type="password"
                                 id="password-again"
                             />
                             <Button
                                 type="submit"
                                 className="register-form__button"
-                            >
-                                Finish
-                            </Button>
+                                buttonText="Finish"
+                            />
                         </form>
                     </div>
             </>
@@ -94,11 +97,8 @@ function Register(){
                         onClick={() => {
                             navigate("/login")
                         }}
-                    >
-                                <span>
-                                        Cancel
-                                </span>
-                    </Button>
+                        buttonText="Cancel"
+                    />
                 </>
             }
             />

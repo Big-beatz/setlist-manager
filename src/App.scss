@@ -5,7 +5,7 @@ $red: #904547;
 $blue-shadow: 5px 7px #324253;
 $yellow-shadow: 5px 7px #837542;
 $red-shadow: 5px 7px #4f2627;
-$content-font: fahkwang, sans-serif;
+$fahkwang: fahkwang, sans-serif;
 $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -15,6 +15,7 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  font-family: $fahkwang;
 }
 
 @import "./assets/fonts/fonts.scss";
@@ -30,3 +31,16 @@ p{
   padding: 0px;
 }
 
+.textInput{
+  background: $yellow-shadow;
+  border: black 1px solid;
+  border-radius: 7px;
+  opacity: 0.7;
+  color: white;
+  font-family: $fahkwang;
+  &:focus{
+    opacity: 1;
+    outline: none;
+  }
+
+}
