@@ -4,6 +4,7 @@ $red: #904547;
 $blue-shadow: 5px 7px #324253;
 $yellow-shadow: 5px 7px #837542;
 $red-shadow: 5px 7px #4f2627;
+$fahkwang: fahkwang, sans-serif;
 $content-font: fahkwang, sans-serif;
 $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
@@ -40,7 +41,140 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       border: black solid 5px;
       border-radius: 7px;
       width: 100%;
+    }
+    .new-setlist--disabled {
+      color: black;
+      background-color: $yellow;
+      font-family: $fascinate;
+      font-size: 120%;
+      text-shadow: $content-lining;
+      box-shadow: $blue-shadow;
+      display: inline-block;
+      padding: 5px;
+      border: black solid 5px;
+      border-radius: 7px;
+      width: 100%;
       filter: blur(2px);
     }
   }
 }
+
+.setlist-creator{
+  display: flex;
+  height: 90%;
+  width: 80%;
+  background-color: white;
+  border: black solid 2px;
+  border-radius: 7px;
+  box-shadow: $blue-shadow;
+  flex-direction: column;
+  align-items: start;
+  padding: 10px;
+  .setlist-creator--header{
+    display: flex;
+    text-shadow: none;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: gray solid 2px;
+    .setlist-creator--close{
+      background: white;
+      font-size: 130%;
+      border: none;
+    }
+  }
+  .setlist-creator--main {
+    width: 100%;
+    height: 85%;
+    border-bottom: gray solid 2px;
+
+    .setlist-creator--form {
+      width: 100%;
+      margin-top: 2%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 10px;
+
+      .setlist-creator--span {
+        font-style: $fahkwang;
+
+        .setlist-creator--input {;
+          border-radius: 7px 0px 0px 7px;
+
+          &:focus {
+            background-color: black;
+            color: white;
+          }
+        }
+      }
+
+      .setlist-creator--add-button {
+        background-color: black;
+        color: white;
+        border-radius: 0px 7px 7px 0px;
+
+      }
+
+      .setlist-creator--clear-setlist {
+        background: $yellow;
+        border: $red solid 2px;
+        color: black;
+        font-family: $fahkwang;
+        border-radius: 7px;
+
+        &:hover {
+          background-color: $red;
+          color: white;
+          border: black solid 2px;
+        }
+      }
+    }
+  }
+
+      .setlist-creator--ol {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .setlist-creator--invalid-entry {
+        color: red;
+        }
+          .setlist-creator--li {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .setlist-creator--delete-button {
+              background: white;
+              font-size: 130%;
+              border: none;
+            }
+          }
+        }
+  }
+  .setlist-creator--footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  .setlist-creator--finish-button{
+    color: white;
+    background-color: black;
+    margin-top: 2%;
+    font-family: $fascinate;
+    font-size: 180%;
+    text-shadow: $content-lining;
+    display: inline-block;
+    padding: 5px;
+    border: black solid 5px;
+    border-radius: 7px;
+  &:hover{
+    color: black;
+    background-color: white;
+  }}
+  }
+
+

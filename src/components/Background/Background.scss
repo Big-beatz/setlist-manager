@@ -37,7 +37,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-grow: 2;
+        flex-grow: 1;
       }
 
       .background-top__large{
@@ -62,7 +62,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-grow: 2;
+        flex-grow: 1;
       }
 
 
@@ -82,7 +82,7 @@ body {
         width: 100%;
         background-color: $blue;
         z-index: 0;
-        flex-grow: 2;
+        flex-grow: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;

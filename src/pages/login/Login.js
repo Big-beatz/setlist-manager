@@ -21,9 +21,11 @@ function Login(){
             classNameBottom="background-bottom"
             topContent={
                 <>
-                    <h1 className="setlist">Setlist</h1>
-                    <h1 className="manager">Manager</h1>
-                < />
+                    <header className="login--header">
+                        <h1 className="setlist">Setlist</h1>
+                        <h1 className="manager">Manager</h1>
+                    </header>
+                </>
             }
             centerContent={
                 <>

@@ -11,18 +11,18 @@ $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
 
-  .setlist, .manager{
+  .setlist, .manager {
     color: $yellow;
     text-shadow: $header-lining, $red-shadow;
     font-size: xxx-large;
-    }
+  }
+
 
 .loginContainer {
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 100%;
-
 
   .login__h2 {
     color: $blue;

@@ -7,7 +7,6 @@ import MySetlists from "./pages/mySetlists/MySetlists";
 import NewSetlist from "./pages/newSetlist/NewSetlist";
 import Homepage from "./pages/home/Homepage";
 import Register from "./pages/Register/Register";
-import Navbar from "./components/Navbar/Navbar"
 
 function App() {
 

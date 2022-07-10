@@ -2,13 +2,27 @@ import React from 'react'
 import './Button.scss'
 
 
-export function Button({children, className, type, onClick, buttonText}){
+export function Button({id, className, type, onClick, buttonText}){
     return(
         <button
             type={type}
             onClick={onClick}
             className={className}
+            id={id}
            >
+            <span>{buttonText}</span>
+        </button>
+    )
+}
+
+export function DisabledButton({className, type, onClick, buttonText}){
+    return(
+        <button
+            type={type}
+            onClick={onClick}
+            className={className}
+            disabled
+        >
             <span>{buttonText}</span>
         </button>
     )
