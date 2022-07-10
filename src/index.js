@@ -4,12 +4,16 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom'
+import UserContextProvider from "./context/UserContext";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Router>
       <React.StrictMode>
-      <App />
+              <UserContextProvider>
+                  <App />
+              </UserContextProvider>
       </React.StrictMode>
     </Router>
 );

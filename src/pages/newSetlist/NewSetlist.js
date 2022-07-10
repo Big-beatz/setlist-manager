@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import './NewSetlist.scss'
 import Background from "../../components/Background/Background";
 import {
@@ -9,8 +9,10 @@ import {
     ProfileButton
 } from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 function NewSetlist(){
+    const data = useContext(UserContext)
     const navigate = useNavigate()
     const [nameOfSetlist, setNameOfSetlist] = useState(undefined)
     const [useSpotify, setUseSpotify] = useState(undefined)
@@ -18,6 +20,8 @@ function NewSetlist(){
     const [songsArray, updateSongsArray] = useState([])
     const [newSong, setNewSong] = useState('')
     const [invalidInput, setInvalidInput] = useState(false)
+
+    console.log(data)
 
 
     function handleSubmit(e){
