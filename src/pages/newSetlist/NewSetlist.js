@@ -9,55 +9,22 @@ import {
     ProfileButton
 } from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
-import UserContext from "../../context/UserContext";
+import {UserContext} from "../../context/UserContext";
+import CreateSetlist from "../../components/CreateSetlist/CreateSetlist";
 
 function NewSetlist(){
-    const data = useContext(UserContext)
     const navigate = useNavigate()
-    const [nameOfSetlist, setNameOfSetlist] = useState(undefined)
-    const [useSpotify, setUseSpotify] = useState(undefined)
-    const [createSetlist, toggleCreateSetlist] = useState(undefined)
-    const [songsArray, updateSongsArray] = useState([])
-    const [newSong, setNewSong] = useState('')
-    const [invalidInput, setInvalidInput] = useState(false)
+    const {setlists} = useContext(UserContext)
 
-    console.log(data)
+    const [nameOfSetlist, setNameOfSetlist] = useState('')
+    const [useSpotify, setUseSpotify] = useState('')
+    const [createSetlist, toggleCreateSetlist] = useState(false)
+
 
 
     function handleSubmit(e){
         e.preventDefault()
         toggleCreateSetlist(true)
-    }
-
-    function close(){
-            updateSongsArray([])
-            setNewSong('')
-            toggleCreateSetlist(undefined)
-            setNameOfSetlist('')
-        }
-
-
-    function pushToSongsArray(e) {
-        e.preventDefault()
-        if (newSong) {
-            if (newSong.indexOf(' ') === 0) {
-                setInvalidInput(true)
-            } else {
-                updateSongsArray((songsArray) => [...songsArray, newSong])
-                setNewSong('')
-                setInvalidInput(false)
-            }
-        }
-    }
-
-
-    function deleteButtonHandler(index) {
-        setInvalidInput(false)
-        if (songsArray.length === 1 && index === 0) {
-            updateSongsArray([])
-        } else {
-            updateSongsArray([...songsArray.slice(0, index), ...songsArray.slice(index + 1)])
-        }
     }
 
     return(
@@ -83,146 +50,79 @@ function NewSetlist(){
         bottomContent={
             <>
                 {createSetlist ?
-                    <div className="setlist-creator">
-                        <header className="setlist-creator--header">
-                        <h2>{nameOfSetlist}</h2>
-                            <Button
-                            onClick={close}
-                            type="button"
-                            className="setlist-creator--close"
-                            buttonText="X"
-                            />
-                        </header>
-                        <main className="setlist-creator--main">
-                                <>
-                                <form
-                                    className="setlist-creator--form"
-                                    onSubmit={pushToSongsArray}
-                                >
-                                    <label htmlFor="setlist-song">
-                                        Song name
-                                    </label>
-                                    <span className="setlist-creator--span">
-                                    <input
-                                        className="setlist-creator--input"
-                                        type="text"
-                                        id="setlist-song"
-                                        value={newSong}
-                                        onChange={e => setNewSong(e.target.value)}
-                                    />
-                                    <Button
-                                        className="setlist-creator--add-button"
-                                        buttonText="Add"
-                                    />
-                                </span>
-                                    <Button
-                                        type="button"
-                                        onClick={() => updateSongsArray([])}
-                                        buttonText="Clear all"
-                                        className="setlist-creator--clear-setlist"
-                                    />
-                                </form>
-                                <ol className ="setlist-creator--ol">
-                            {invalidInput ?
-                                <>
-                                <p
-                                className="setlist-creator--invalid-entry"
-                                >
-                                Input can't start with a space
-                                </p>
-                                <br/>
-                                </>
-                                :
-                                null
-                            }
-                            {(songsArray.length >= 1) ?
-                                songsArray.map((songArray, index) => {
-                                return <li className="setlist-creator--li">
-                            {index +1}. {songArray}
-                                <Button
-                                className="setlist-creator--delete-button"
-                                type="button"
-                                onClick={() => {deleteButtonHandler(index)}}
-                                buttonText="X"
-                                />
-                                </li>
-                            })
-                                :
-                                <p className="setlist-creator--empty-list-message">
-                                Add a song
-                                </p>
-                            }
-
-                                </ol>
-                                </>
-                        </main>
-                        <footer className="setlist-creator--footer">
-                            <Button
-                                className="setlist-creator--finish-button"
-                                buttonText="Finish"
-                                onClick=""
-                            />
-                        </footer>
-                    </div>
-                    :
-                    <div className="new-setlist">
-                        <NewSetlistButton
-                            onClick={() => {
-                                navigate("/home")
-                            }}
+                        <CreateSetlist
+                        nameOfSetlist={nameOfSetlist}
+                        useSpotify={useSpotify}
                         />
-                        <form
-                            className="new-setlist--form"
-                            onSubmit={handleSubmit}
-                        >
-                            <label htmlFor="setlist-name">
-                                Setlist Name:
-                            </label>
-                            <input
-                                className="textInput"
-                                type="text"
-                                id="setlist-name"
-                                value={nameOfSetlist}
-                                onChange={e => setNameOfSetlist(e.target.value)}
+                        :
+                        <div className="new-setlist">
+                            <NewSetlistButton
+                                onClick={() => {
+                                    navigate("/home")
+                                }}
                             />
-                            <legend>
-                                Do you want to use Spotify?
-                            </legend>
-                            <div className="new-setlist-radio">
-                                <label htmlFor="useSpotify">
+                            {setlists.length < 6 ?
+                                <form
+                                    className="new-setlist--form"
+                                    onSubmit={handleSubmit}
+                                >
+                                    <label htmlFor="setlist-name">
+                                        Setlist Name:
+                                    </label>
                                     <input
-                                        type="radio"
-                                        name="useSpotify"
-                                        id="useSpotify"
-                                        onClick={() => setUseSpotify("useSpotify")}
+                                        className="textInput"
+                                        type="text"
+                                        id="setlist-name"
+                                        value={nameOfSetlist}
+                                        onChange={e => setNameOfSetlist(e.target.value)}
                                     />
-                                    Yes
-                                </label>
-                                <label htmlFor="dontUseSpotify">
-                                    <input
-                                        type="radio"
-                                        id="dontUseSpotify"
-                                        name="useSpotify"
-                                        onClick={() => setUseSpotify("dontUseSpotify")}
-                                    />
-                                    No
-                                </label>
-                            </div>
-                            {nameOfSetlist && useSpotify ?
-                                <Button
-                                    className="new-setlist--submit"
-                                    type="submit"
-                                    buttonText="Create Setlist"
-                                />
+                                    <legend>
+                                        Do you want to use Spotify?
+                                    </legend>
+                                    <div className="new-setlist-radio">
+                                        <label htmlFor="useSpotify">
+                                            <input
+                                                type="radio"
+                                                name="useSpotify"
+                                                id="useSpotify"
+                                                onClick={() => setUseSpotify('useSpotify')}
+                                            />
+                                            Yes
+                                        </label>
+                                        <label htmlFor="dontUseSpotify">
+                                            <input
+                                                type="radio"
+                                                id="dontUseSpotify"
+                                                name="useSpotify"
+                                                onClick={() => setUseSpotify('dontUseSpotify')}
+                                            />
+                                            No
+                                        </label>
+                                    </div>
+                                    {nameOfSetlist && useSpotify ?
+                                        <Button
+                                            className="new-setlist--submit"
+                                            type="submit"
+                                            buttonText="Create Setlist"
+                                        />
+                                        :
+                                        <DisabledButton
+                                            className="new-setlist--disabled"
+                                            type="submit"
+                                            buttonText="Create Setlist"
+                                        />
+                                    }
+                                </form>
                                 :
-                                <DisabledButton
-                                    className="new-setlist--disabled"
-                                    type="submit"
-                                    buttonText="Create Setlist"
-                                />
+                                <div className="new-setlist--maximum">
+                                    <h1>Oops</h1>
+                                    <br/>
+                                    <p>The maximum number of setlists has been reached.</p>
+                                    <p>Please delete a setlist to make a new one.  </p>
+                                </div>
                             }
-                        </form>
-                    </div>
+                        </div>
+
                 }
             </>
         }

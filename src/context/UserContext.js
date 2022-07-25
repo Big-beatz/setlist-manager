@@ -1,21 +1,30 @@
-import React, {createContext, useState} from 'react'
+import React, {createContext, useState, useEffect} from 'react'
 
-const UserContext = createContext({})
+export const UserContext = createContext({})
 
 function UserContextProvider({children}){
-    const [setlists, setSetlists] = useState({setlistName: '', setlistArray: []})
-    //
-    // function addSetlist(){
-    //     setSetlists((setlists) => {...setlists, setlistName})
-    //
-    // }
+    const [setlists, updateSetlists] = useState([])
 
-    const data = {
-        userName: undefined,
-        setlist: setlists
+    const setlistData = {
+        setlists: setlists,
+        updateSetlists: updateSetlists,
+        addSetlist: addSetlist
     }
+
+
+        function addSetlist(nameOfSetlist, listOfSongs) {
+        if (setlists.length === 0){
+            updateSetlists([{setlistName: nameOfSetlist, setlistArray: listOfSongs}])
+        } else{
+                updateSetlists([...setlists, {setlistName: nameOfSetlist, setlistArray: listOfSongs}])
+        }
+        }
+
+
+    console.log(setlists)
+
     return(
-        <UserContext.Provider value={data}>
+        <UserContext.Provider value={setlistData}>
             {children}
         </UserContext.Provider>
     )

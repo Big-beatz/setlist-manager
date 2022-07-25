@@ -9,31 +9,55 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-
-.setlists {
-  list-style: none;
+.my-setlists--content{
+  width: 100%;
+  height: 90%;
   display: flex;
-  width: 96%;
-  margin-inline-start: 0px;
-  padding-left: 0px;
-  margin-right: 10%;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  .setlists--section {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .my-setlists--header{
     width: 100%;
-    background-color: white;
-    padding: 10px 30px 20px 10px;
-    border: black solid 1px;
-    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    h3 {
-      color: $blue;
-      text-shadow: $content-lining;
-      font-size: 120%;
+  .my-setlists--div {
+    display: flex;
+    margin: 10%;
+    max-height: 80%;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .my-setlists--section {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      max-height: 100%;
+      margin: 5px;
+      background-color: white;
+      padding: 5px;
+      border: gray solid 1px;
+      border-radius: 7px;
+      box-shadow: $yellow-shadow;
+      .my-setlists--span{
+        border-bottom: black 1px solid;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .my-setlists--h3 {
+          color: $blue;
+          text-shadow: $content-lining;
+          font-size: 120%;
+        }
+        .my-setlists--close-button{
+          background: white;
+          font-size: 100%;
+          border: none;
+        }
+      }
     }
-
   }
 }

@@ -7,6 +7,7 @@ import MySetlists from "./pages/mySetlists/MySetlists";
 import NewSetlist from "./pages/newSetlist/NewSetlist";
 import Homepage from "./pages/home/Homepage";
 import Register from "./pages/Register/Register";
+import CreateSetlist from "./components/CreateSetlist/CreateSetlist";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/my-setlists" element={<MySetlists />} />
             <Route path="/new-setlist" element={<NewSetlist />} />
+            <Route path="/create-setlist" element={<CreateSetlist />} />
           </Routes>
       </>
   );
