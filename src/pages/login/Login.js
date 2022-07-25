@@ -3,15 +3,26 @@ import './Login.scss'
 import Background from "../../components/Background/Background";
 import {Button} from "../../components/Button/Button";
 import {useNavigate, Navigate} from "react-router";
+import axios from 'axios'
 
 function Login(){
+    const noviBackend = 'https://frontend-educational-backend.herokuapp.com/'
     const navigate = useNavigate();
+
+    async function contactBackend(){
+        try{
+            const data = await axios.get( 'https://frontend-educational-backend.herokuapp.com/api/test/all')
+            console.log(data)
+        }
+        catch(e){
+            console.error(e)
+        }
+    }
+
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log("Ingelogd")
         navigate("/home")
-
     }
 
     return (

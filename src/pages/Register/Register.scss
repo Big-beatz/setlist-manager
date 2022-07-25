@@ -15,13 +15,11 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   text-shadow: $header-lining, $red-shadow;
   font-size: xxx-large;
 }
-
 .registerContainer {
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 100%;
-
   .register-form__h2 {
     color: $blue;
     font-size: x-large;
@@ -48,8 +46,13 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   margin: 0 0 2% 10%;
   width: 70%;
   max-width: 700px;
-
-  .register-form__button {
+  .register-form__invalid-input{
+    font-family: $fahkwang;
+    font-size:medium;
+    color: #fa0404;
+    text-shadow: none;
+  }
+  .register-form--button, .register-form--button__disabled{
     font-family: $fascinate;
     text-shadow: $content-lining;
     color: $yellow;
@@ -61,29 +64,28 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     margin: 2%;
     width: 50%;
     max-width: 250px;
-
-    &:hover {
+    &:hover:not(.register-form--button__disabled) {
       background-color: $yellow;
       color: $blue
     }
   }
+  .register-form--button__disabled{
+    filter: blur(2px);
+  }
 }
-
-
-      .registerButton--cancel-register{
-        font-family: $fascinate;
-        color: $yellow;
-        background-color: $red;
-        outline: none;
-        border: solid;
-        border-radius: 7px;
-        font-size: xx-large;
-        box-shadow: $blue-shadow;
-        align-self: flex-end;
-        margin: 3% 10% 10% 3%;
-
-        &:hover {
-          background-color: $yellow;
-          color: $red;
-        }
+.registerButton--cancel-register{
+  font-family: $fascinate;
+  color: $yellow;
+  background-color: $red;
+  outline: none;
+  border: solid;
+  border-radius: 7px;
+  font-size: xx-large;
+  box-shadow: $blue-shadow;
+  align-self: flex-end;
+  margin: 3% 10% 10% 3%;
+  &:hover {
+    background-color: $yellow;
+    color: $red;
+    }
       }

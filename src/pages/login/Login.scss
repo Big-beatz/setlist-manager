@@ -11,19 +11,16 @@ $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
 
-  .setlist, .manager {
+.setlist, .manager {
     color: $yellow;
     text-shadow: $header-lining, $red-shadow;
     font-size: xxx-large;
   }
-
-
 .loginContainer {
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 100%;
-
   .login__h2 {
     color: $blue;
     font-size: xx-large;
@@ -36,7 +33,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     border-radius: 5px;
   }
 }
-
 .loginForm {
   font-family: $fascinate;
   font-size: x-large;
@@ -51,8 +47,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   margin: 0 0 2% 10%;
   width: 70%;
   max-width: 700px;
-
-
   .loginForm__button {
     font-family: $fascinate;
     text-shadow: $content-lining;
@@ -65,7 +59,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     margin: 2%;
     width: 50%;
     max-width: 250px;
-
     &:hover {
       background-color: $yellow;
       color: $blue
@@ -83,7 +76,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       box-shadow: $blue-shadow;
       align-self: flex-end;
       margin: 3% 10% 10% 3%;
-
       &:hover {
         background-color: $yellow;
         color: $red;
