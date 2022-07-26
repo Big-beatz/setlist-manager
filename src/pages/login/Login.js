@@ -19,6 +19,7 @@ function Login(){
         }
     }
 
+contactBackend()
 
     function handleSubmit(e){
         e.preventDefault();

@@ -46,10 +46,10 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   margin: 0 0 2% 10%;
   width: 70%;
   max-width: 700px;
-  .register-form__invalid-input{
+  .register-form--requirement{
     font-family: $fahkwang;
-    font-size:medium;
-    color: #fa0404;
+    font-size:small;
+    color: black;
     text-shadow: none;
   }
   .register-form--button, .register-form--button__disabled{
