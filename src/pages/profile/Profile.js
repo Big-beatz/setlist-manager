@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './Profile.scss'
 import Background from "../../components/Background/Background";
-import {MySetlistsButton, NewSetlistButton, ProfileButton} from "../../components/Button/Button";
+import {Button, MySetlistsButton, NewSetlistButton, ProfileButton} from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 function Profile(){
+    const {authData} = useContext(AuthContext)
     const navigate = useNavigate()
 
     return(
@@ -18,11 +20,16 @@ function Profile(){
                     onClick={() => {navigate("/home")}}
                     />
                     <h2>
-                        Profielnaam
+                        {/*{authData.authState.user.username}*/}
                     </h2>
                     <h2>
-                        Mailadres
+                        {/*{authState.user.mail}*/}
                     </h2>
+                    <Button
+                        type="button"
+                        onClick={() => {}}
+                        buttonText="Logout"
+                    />
                 </div>
                 }
             centerContent={

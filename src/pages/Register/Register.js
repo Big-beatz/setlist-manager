@@ -36,7 +36,6 @@ function Register(){
             ...userRegistration,
             [e.target.name]: e.target.value
         })
-
     }
 
     async function reguestRegistration() {
@@ -67,7 +66,11 @@ function Register(){
         setUserRegistration({...userRegistration, username: '', passwordAgain: '', mailadres: '', password: ''})
         toggleError(false)
     }
-    // console.log(invalidInput)
+
+    function toLogin(){
+        setRegisterStatus(false)
+        navigate('/login')
+    }
 
     return(
         <Background
@@ -89,6 +92,7 @@ function Register(){
                         registerStatus={registerStatus}
                         userName={userRegistration.username}
                         clearRegistration={clearRegistration}
+                        toLogin={toLogin}
                     />
                     :
                         <>
@@ -189,18 +193,20 @@ function Register(){
             }
             bottomContent={
             <>
-                <Button
-                    type="button"
-                    className="registerButton--cancel-register"
-                    onClick={() => {
+                {(!registerStatus && !error) &&
+                    <Button
+                        type="button"
+                        className="registerButton--cancel-register"
+                        onClick={() => {
                         navigate("/login")
-                    }}
-                    buttonText="Cancel"
-                />
+                        }}
+                        buttonText="Cancel"
+                    />
+                }
             </>
             }
-            />
-        )
+        />
+    )
 }
 
 export default Register

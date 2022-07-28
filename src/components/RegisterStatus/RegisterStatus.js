@@ -1,27 +1,35 @@
 import React from "react";
 import {Button} from "../Button/Button";
 import {useNavigate} from "react-router-dom";
+import './RegisterStatus.scss'
 
-function RegisterStatus({registerStatus, error, userName, clearRegistration}){
+function RegisterStatus({registerStatus, error, userName, clearRegistration, toLogin}){
     const navigate = useNavigate();
 
     return(
         <>
             {registerStatus &&
-            <div>
+            <div className="registerStatus--div__succes">
                 <h1>Congratulations {userName}!</h1>
-                <p>Registration is complete, return to Login</p>
+                <p>Registration is complete.</p>
+                <p>To login press the continue button.</p>
                 <Button
-                    buttonText="Login"
-                    onCLick={() => {navigate("/login")}}
+                    type="button"
+                    buttonText="Continue"
+                    onClick={() => {
+                    navigate("/login")
+                }}
                 />
             </div>
             }
             {error &&
-            <div>
+            <div className="registerStatus--div__error">
                 <h1>Oops</h1>
-                <p>Something went wrong, most likely your username is already in use. Try again.</p>
+                <p>Something went wrong.</p>
+                <p>Make sure the mailadres has the proper format.</p>
+                <p>Please try again with a different username. </p>
                 <Button
+                type="button"
                 buttonText="Try Again"
                 onClick={clearRegistration}
                 />

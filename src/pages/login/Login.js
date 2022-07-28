@@ -8,6 +8,11 @@ import axios from 'axios'
 function Login(){
     const noviBackend = 'https://frontend-educational-backend.herokuapp.com/'
     const navigate = useNavigate();
+    const [error, toggleError] = useState(false)
+    const [userLogin, setUserLogin] = useState({
+        username: "",
+        password: ""
+    })
 
     async function contactBackend(){
         try{
@@ -19,11 +24,41 @@ function Login(){
         }
     }
 
-contactBackend()
+    function clearLogin(){
+        setUserLogin({
+            ...userLogin, username:"", password: ""
+        })
+    }
+    async function handleLogin(){
+        try{
+            const {data} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+                "username": userLogin.username,
+                "password": userLogin.password
+            })
+            toggleError(false)
+            console.log(data)
+            localStorage.setItem('token', data.accessToken)
+}
+        catch(e){
+            console.error(e)
+            toggleError(true)
+            clearLogin()
+        }
+    }
+
+
+
+    function handleChange(e){
+        setUserLogin({
+            ...userLogin,
+            [e.target.name]: e.target.value
+        })
+    }
 
     function handleSubmit(e){
         e.preventDefault();
-        navigate("/home")
+        contactBackend()
+        handleLogin()
     }
 
     return (
@@ -58,6 +93,8 @@ contactBackend()
                                 <input
                                     className="textInput"
                                     type="text"
+                                    name="username"
+                                    onChange={handleChange}
                                 />
                                 <label
                                     htmlFor="" id="password"
@@ -67,7 +104,13 @@ contactBackend()
                                 <input
                                     className="textInput"
                                     type="password"
+                                    name="password"
+                                    onChange={handleChange}
                                 />
+                            {error &&
+                            <p className="login-error-message">
+                                *Username & password combination is incorrect, please try again or register first.
+                            </p>}
                                 <Button
                                 type="submit"
                                 className="loginForm__button"

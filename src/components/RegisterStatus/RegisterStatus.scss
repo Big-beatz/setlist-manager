@@ -1,0 +1,36 @@
+$blue: #445A73;
+$yellow: #E3C569;
+$red: #904547;
+$blue-shadow: 5px 7px #324253;
+$yellow-shadow: 5px 7px #837542;
+$red-shadow: 5px 7px #4f2627;
+$fahkwang: fahkwang, sans-serif;
+$fascinate: 'Fascinate', sans-serif;
+$header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
+$content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+.registerStatus--div__succes, .registerStatus--div__error{
+  border: $blue solid 5px;
+  border-radius: 7px;
+  margin:2% 5% 3%;
+  padding: 10px;
+  box-shadow: $yellow-shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  Button{
+    width: 40%;
+    align-self: flex-end;
+    font-family: $fascinate;
+    text-shadow: $content-lining;
+    color: $yellow;
+    background-color: $red;
+    border: solid;
+    border-radius: 7px;
+    font-size: x-large;
+    &:hover{
+      background-color: $yellow;
+      color: $blue
+    }
+  }
+}

@@ -12,16 +12,14 @@ function UserContextProvider({children}){
     }
 
 
-        function addSetlist(nameOfSetlist, listOfSongs) {
+    function addSetlist(nameOfSetlist, listOfSongs) {
         if (setlists.length === 0){
             updateSetlists([{setlistName: nameOfSetlist, setlistArray: listOfSongs}])
         } else{
                 updateSetlists([...setlists, {setlistName: nameOfSetlist, setlistArray: listOfSongs}])
         }
-        }
+    }
 
-
-    console.log(setlists)
 
     return(
         <UserContext.Provider value={setlistData}>
