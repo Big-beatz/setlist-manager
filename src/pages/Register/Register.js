@@ -5,6 +5,7 @@ import Background from "../../components/Background/Background";
 import './Register.scss'
 import axios from 'axios'
 import RegisterStatus from "../../components/RegisterStatus/RegisterStatus";
+import Input from "../../components/Input/Input";
 
 function Register(){
     const navigate = useNavigate();
@@ -31,13 +32,6 @@ function Register(){
         }
     }, [handleChange])
 
-    function handleChange(e){
-        setUserRegistration({
-            ...userRegistration,
-            [e.target.name]: e.target.value
-        })
-    }
-
     async function reguestRegistration() {
         try {
             const data = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
@@ -57,16 +51,19 @@ function Register(){
         toggleLoading(false)
     }
 
+    function handleChange(e){
+        setUserRegistration({
+            ...userRegistration,
+            [e.target.name]: e.target.value})
+    }
     function handleRegister(e) {
         e.preventDefault()
         reguestRegistration()
     }
-
     function clearRegistration(){
         setUserRegistration({...userRegistration, username: '', passwordAgain: '', mailadres: '', password: ''})
         toggleError(false)
     }
-
     function toLogin(){
         setRegisterStatus(false)
         navigate('/login')
@@ -95,98 +92,71 @@ function Register(){
                         toLogin={toLogin}
                     />
                     :
-                        <>
+                    <>
                         <span>
                             <h2 className="register-form__h2">
                                 Register
                             </h2>
                         </span>
-                    <form
-                        className="register-form"
-                        onSubmit={handleRegister}
-                    >
-                        <label
-                            htmlFor="mailadres"
-                            id="mailadres"
+                        <form
+                            className="register-form"
+                            onSubmit={handleRegister}
                         >
-                            E-mailadres
-                                <p className="register-form--requirement">
-                                    Mailadres requires a '@' token.
-                                </p>
-                        </label>
-                        <input
-                            className="textInput"
-                            type="text"
-                            id="mailadres"
-                            name="mailadres"
-                            value={userRegistration.mailadres}
-                            onChange={handleChange}
-                        />
-                        <label
-                            htmlFor="username"
-                            id="username"
-                        >
-                            Username
-                            <p className="register-form--requirement">
-                                *Username must be at least 6 tokens.
-                            </p>
-
-                        </label>
-                        <input
-                            className="textInput"
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={userRegistration.username}
-                            onChange={handleChange}
-                        />
-                        <label
-                            htmlFor="password"
-                            id="password"
-                        >
-                            Password
-                            <p className="register-form--requirement">
-                                *Password must be at least 6 tokens.
-                            </p>
-                        </label>
-                        <input
-                            className="textInput"
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={userRegistration.password}
-                            onChange={handleChange}
-                        />
-                        <label
-                            htmlFor="password-again"
-                            id="password-again"
-                        >
-                            Password again
-                        </label>
-                        <input
-                            className="textInput"
-                            type="password"
-                            name="passwordAgain"
-                            id="password-again"
-                            value={userRegistration.passwordAgain}
-                            onChange={handleChange}
-                        />
-                        {loading && <p>...Loading</p>}
-                        { validInput ?
-                            <Button
-                                type="submit"
-                                className="register-form--button"
-                                buttonText="Finish"
+                            <Input
+                                label="E-mailadres"
+                                className="textInput"
+                                inputType="text"
+                                inputName="mailadres"
+                                onChange={handleChange}
+                                children={
+                                    <p className="register-form--p">
+                                        Mailadres requires a '@' token.
+                                    </p>}
                             />
+                            <Input
+                                label="Username"
+                                className="textInput"
+                                inputType="text"
+                                inputName="username"
+                                onChange={handleChange}
+                                children={
+                                    <p className="register-form--p">
+                                        *Username must be at least 6 tokens.
+                                    </p>}
+                            />
+                            <Input
+                                label="Password"
+                                className="textInput"
+                                inputType="password"
+                                inputName="password"
+                                onChange={handleChange}
+                                children={
+                                    <p className="register-form--p">
+                                        *Password must be at least 6 tokens.
+                                    </p>}
+                            />
+                            <Input
+                                label="Password Again"
+                                className="textInput"
+                                inputType="password"
+                                inputName="passwordAgain"
+                                onChange={handleChange}
+                            />
+                            {loading && <p>...Loading</p>}
+                            { validInput ?
+                                <Button
+                                    type="submit"
+                                    className="register-form--button"
+                                    buttonText="Finish"
+                                />
                             :
-                            <DisabledButton
-                                className="register-form--button__disabled"
-                                buttonText="Finish"
-                            />
-                        }
-
+                                <DisabledButton
+                                    className="register-form--button__disabled"
+                                    buttonText="Finish"
+                                />
+                            }
                         </form>
-                        </>
+                    </>
                     }
                 </div>
             </>

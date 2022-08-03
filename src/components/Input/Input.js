@@ -1,17 +1,21 @@
 import './Input.scss'
 import React from 'react'
 
-function Input(label, inputType, value, onChange, children, inputClass){
+function Input({children, label, inputType, value, onChange, className, inputName}){
     return(
         <>
-            <label>{label}
+            <label>
+                {label}
+            </label>
+            {children}
                 <input
                     type={inputType}
                     value={value}
+                    name={inputName}
                     onChange={onChange}
-                    className={inputClass}
+                    className={className}
                 />
-            </label>
+
         </>
     )
 }

@@ -21,6 +21,8 @@ axios
 
 Router
 
+jwt-decode@3.1.2
+
 
 ### Dev Dependencies
 

@@ -9,11 +9,9 @@ function Background(props){
                 <div className={props.classNameTop}>
                     {props.topContent}
                 </div>
-                <div className="redOverlap" />
                 <div className={props.classNameCenter}>
                     {props.centerContent}
                 </div>
-                <div className="blueOverlap" />
                 <div className={props.classNameBottom}>
                     {props.bottomContent}
                 </div>

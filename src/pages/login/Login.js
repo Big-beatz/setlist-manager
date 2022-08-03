@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './Login.scss'
 import Background from "../../components/Background/Background";
+import Input from "../../components/Input/Input"
 import {Button} from "../../components/Button/Button";
-import {useNavigate, Navigate} from "react-router";
+import {useNavigate, Navigate} from "react-router-dom";
 import axios from 'axios'
+import {AuthContext} from "../../context/AuthContext";
 
 function Login(){
+    const {setAuthState, authState} = useContext(AuthContext)
     const noviBackend = 'https://frontend-educational-backend.herokuapp.com/'
     const navigate = useNavigate();
     const [error, toggleError] = useState(false)
@@ -14,6 +17,7 @@ function Login(){
         password: ""
     })
 
+    useEffect(() => {
     async function contactBackend(){
         try{
             const data = await axios.get( 'https://frontend-educational-backend.herokuapp.com/api/test/all')
@@ -23,12 +27,19 @@ function Login(){
             console.error(e)
         }
     }
-
-    function clearLogin(){
-        setUserLogin({
-            ...userLogin, username:"", password: ""
+        contactBackend()
+        localStorage.clear()
+        setAuthState({
+            ...authState,
+            user: null,
+            authStatus: 'done',
+            isAuth: false
         })
-    }
+        sessionStorage.clear()
+    }, [])
+
+
+
     async function handleLogin(){
         try{
             const {data} = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
@@ -38,14 +49,14 @@ function Login(){
             toggleError(false)
             console.log(data)
             localStorage.setItem('token', data.accessToken)
-}
+            setTimeout(() => {
+            navigate('/home')}, 1000)
+        }
         catch(e){
             console.error(e)
             toggleError(true)
-            clearLogin()
         }
     }
-
 
 
     function handleChange(e){
@@ -57,7 +68,6 @@ function Login(){
 
     function handleSubmit(e){
         e.preventDefault();
-        contactBackend()
         handleLogin()
     }
 
@@ -83,30 +93,23 @@ function Login(){
                             </h2>
                         </span>
                         <form
-                            action=""
                             className="loginForm"
                             onSubmit={handleSubmit}
                         >
-                                <label htmlFor="" id="username">
-                                    Username
-                                </label>
-                                <input
-                                    className="textInput"
-                                    type="text"
-                                    name="username"
-                                    onChange={handleChange}
-                                />
-                                <label
-                                    htmlFor="" id="password"
-                                >
-                                    Password
-                                </label>
-                                <input
-                                    className="textInput"
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                />
+                            <Input
+                                label="Username"
+                                className="textInput"
+                                inputType="text"
+                                inputName="username"
+                                onChange={handleChange}
+                            />
+                            <Input
+                                label="Password"
+                                className="textInput"
+                                inputType="password"
+                                inputName="password"
+                                onChange={handleChange}
+                            />
                             {error &&
                             <p className="login-error-message">
                                 *Username & password combination is incorrect, please try again or register first.
@@ -116,9 +119,9 @@ function Login(){
                                 className="loginForm__button"
                                 buttonText="Login"
                                 />
-                        </form>
-                    </div>
-                </>
+                            </form>
+                        </div>
+                    </>
                     }
                     bottomContent={
                     <>

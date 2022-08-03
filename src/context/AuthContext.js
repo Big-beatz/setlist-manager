@@ -1,55 +1,84 @@
 import React, {createContext, useEffect, useState} from "react";
 import axios from 'axios'
+import jwtDecode from "jwt-decode";
+import {useNavigate} from "react-router-dom";
 
-const AuthContext = createContext({})
+export const AuthContext = createContext({})
 
 function AuthContextProvider({children}) {
+    const navigate = useNavigate()
     const [authState, setAuthState] = useState(
-{user: undefined,
-        status: 'pending'
-    })
-
+        {
+            user: null,
+            authStatus: 'pending',
+            isAuth: false
+        })
     const token = localStorage.getItem('token')
 
     useEffect(() => {
+        const currentTime = new Date().getTime().valueOf() / 1000
         if (token) {
-            async function getUser() {
-                try {
-                    const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                            }
-                        })
-                    setAuthState({
-                        ...authState,
-                        user: {
-                            name: data.username,
-                            id: data.id, mail: data.email
-                        },
-                        status: 'done'
-                    })
+            const decodedToken = jwtDecode(token)
 
-                    console.log(data)
-                    console.log(authState)
-                } catch (e) {
-                    console.error(e)
+            if (decodedToken.exp > currentTime) {
+                console.log(currentTime)
+                async function getUser() {
+                    try {
+                        const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
+                            {
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": `Bearer ${token}`,
+                                }
+                            })
+                        setAuthState({
+                            ...authState,
+                            user: {
+                                username: data.username,
+                                mail: data.email,
+                                id: data.id
+                            },
+                            authStatus: 'done',
+                            isAuth: true
+                        })
+                        console.log(data)
+                    } catch (e) {
+                        console.error(e)
+                    }
                 }
+                getUser()
             }
-            getUser()
+        } else {
+            setAuthState({
+                ...authState,
+                user:null,
+                authStatus: 'done'
+            })
         }
     }, [])
 
-    const authData = {
-        authState,
-        setAuthState
+
+    function logout() {
+        localStorage.clear()
+        setAuthState({
+            ...authState,
+            user: null,
+            authStatus: 'done',
+            isAuth: false
+        })
+        sessionStorage.clear()
+        navigate('/login')
     }
 
+    const authData = {
+            authState: authState,
+            setAuthState: setAuthState,
+            logout: logout
+        }
 
-    return(
+    return (
         <AuthContext.Provider value={authData}>
-            {authState.status === 'done' ? children : <p>Loading</p>}
+            {authState.authStatus === 'done' ? children : <p>Loading</p>}
         </AuthContext.Provider>
     )
 }

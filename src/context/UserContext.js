@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from 'react'
+import React, {createContext, useState} from 'react'
 
 export const UserContext = createContext({})
 
@@ -14,9 +14,13 @@ function UserContextProvider({children}){
 
     function addSetlist(nameOfSetlist, listOfSongs) {
         if (setlists.length === 0){
-            updateSetlists([{setlistName: nameOfSetlist, setlistArray: listOfSongs}])
+            updateSetlists([{
+                setlistName: nameOfSetlist,
+                setlistArray: listOfSongs}])
         } else{
-                updateSetlists([...setlists, {setlistName: nameOfSetlist, setlistArray: listOfSongs}])
+                updateSetlists([...setlists,
+                    {setlistName: nameOfSetlist,
+                        setlistArray: listOfSongs}])
         }
     }
 
