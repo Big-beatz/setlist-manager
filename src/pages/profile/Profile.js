@@ -12,11 +12,23 @@ function Profile() {
     const navigate = useNavigate()
     const reloadCount = sessionStorage.getItem('reloadCount')
 
+    useEffect(() => {
+        function checkAuthorization(){
+            if(authState.isAuth === false){
+                navigate('/login')
+            }
+        }
+        checkAuthorization()
+    }, []);
+
+
 
     useEffect(() => {
-        setUsername(authState.user.username)
-        setMailadres(authState.user.mail)
-    }, [authState.isAuth])
+        setTimeout(() => {
+            setUsername(authState.user.username)
+            setMailadres(authState.user.mail)
+        }, 10)
+    }, [])
 
 
     return (
@@ -25,23 +37,38 @@ function Profile() {
             classNameCenter="background-center"
             classNameBottom="background-bottom"
             topContent={
-                <div className="profileContainer">
+                <div className="profile">
                     <ProfileButton
                         onClick={() => {
                             navigate("/home")
                         }}
                     />
-                            <h2>
+                    <div className ="profile--div">
+                        <div className ="profile--div__username">
+                            <h2 className="profile--h2">
+                                Username:
+                            </h2>
+                            <br/>
+                            <p className="profile--p">
                                 {username}
+                            </p>
+                        </div>
+                        <div className ="profile--div__mailadres">
+                            <h2 className="profile--h2">
+                                Mailadres:
                             </h2>
-                            <h2>
+                            <br/>
+                            <p className="profile--p">
                                 {mailadres}
-                            </h2>
-                    <Button
-                        type="button"
-                        onClick={logout}
-                        buttonText="Logout"
-                    />
+                            </p>
+                        </div>
+                        <Button
+                            className="logoutButton"
+                            type="button"
+                            onClick={logout}
+                            buttonText="Logout"
+                        />
+                    </div>
                 </div>
             }
             centerContent={

@@ -7,7 +7,7 @@ import MySetlists from "./pages/mySetlists/MySetlists";
 import NewSetlist from "./pages/newSetlist/NewSetlist";
 import Homepage from "./pages/home/Homepage";
 import Register from "./pages/Register/Register";
-import CreateSetlist from "./components/CreateSetlist/CreateSetlist";
+import CreateSetlist from "./components/CreateSetlist/CreateSpotifySetlist";
 import {AuthContext} from "./context/AuthContext";
 
 function App() {

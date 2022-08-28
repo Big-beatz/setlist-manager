@@ -50,7 +50,7 @@ function Login(){
             console.log(data)
             localStorage.setItem('token', data.accessToken)
             setTimeout(() => {
-            navigate('/home')}, 1000)
+            navigate('/home')}, 500)
         }
         catch(e){
             console.error(e)

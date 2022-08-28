@@ -19,9 +19,7 @@ function AuthContextProvider({children}) {
         const currentTime = new Date().getTime().valueOf() / 1000
         if (token) {
             const decodedToken = jwtDecode(token)
-
             if (decodedToken.exp > currentTime) {
-                console.log(currentTime)
                 async function getUser() {
                     try {
                         const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
@@ -44,6 +42,12 @@ function AuthContextProvider({children}) {
                         console.log(data)
                     } catch (e) {
                         console.error(e)
+                        setAuthState({
+                            ...authState,
+                            user:null,
+                            isAuth: false,
+                            authStatus: 'done'
+                        })
                     }
                 }
                 getUser()
@@ -52,19 +56,20 @@ function AuthContextProvider({children}) {
             setAuthState({
                 ...authState,
                 user:null,
+                isAuth: false,
                 authStatus: 'done'
             })
         }
-    }, [])
-
+    }, [token])
 
     function logout() {
         localStorage.clear()
         setAuthState({
             ...authState,
             user: null,
+            isAuth: false,
             authStatus: 'done',
-            isAuth: false
+
         })
         sessionStorage.clear()
         navigate('/login')

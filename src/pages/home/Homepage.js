@@ -4,7 +4,6 @@ import {ProfileButton, MySetlistsButton, NewSetlistButton} from "../../component
 import React, {useContext, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
-import checkAuthorization from "../../components/Helpers/CheckAuthorization";
 
 
 function Homepage(){
@@ -13,6 +12,7 @@ function Homepage(){
     const reloadCount = sessionStorage.getItem('reloadCount')
 
     useEffect(() => {
+
         if(reloadCount < 1) {
             sessionStorage.setItem('reloadCount', String(reloadCount + 1));
             window.location.reload();
@@ -26,8 +26,6 @@ function Homepage(){
             navigate('/login')
         }
     }
-
-
 
     return(
     <Background
