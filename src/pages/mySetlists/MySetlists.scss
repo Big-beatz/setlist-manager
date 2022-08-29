@@ -22,7 +22,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     flex-direction: column;
     align-items: center;
   }
-
   .my-setlists--div {
     display: flex;
     margin: 10%;
@@ -42,7 +41,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       border: gray solid 1px;
       border-radius: 7px;
       box-shadow: $yellow-shadow;
-      .my-setlists--span{
+      .my-setlists--buttons{
         border-bottom: black 1px solid;
         display: flex;
         flex-direction: row;
@@ -51,7 +50,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
           background-color: white;
           font-family: $fascinate;
           font-size: 130%;
-          width: 80%;
+          width: 70%;
           max-width:80%;
           text-align: start;
           border: none;
@@ -62,14 +61,31 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
             color: white;
           }
         }
-        .my-setlists--img{
-          max-height: 25px;
-        }
-        .my-setlists--close-button{
+        .my-setlists--delete-button{
           background: white;
-          font-size: 140%;
-          border: none;
+          color: $red;
+          font-size: 100%;
+          border: $red 5px solid;
+          border-radius: 7px;
+          font-family: $fascinate;
+          &:hover{
+            background: $red;
+            color: white;
+            font-size: 100%;
+            border-radius: 7px;
+            font-family: $fascinate;
+          }
         }
+      }
+      .my-setlists--span{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .my-setlists--img{
+        max-height: 25px;
+        max-width: 25px;
+        align-self: end;
       }
     }
   }

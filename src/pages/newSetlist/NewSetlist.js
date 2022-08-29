@@ -18,7 +18,6 @@ import spotifyIcon from '../../assets/icons/Spotify_logo_without_text.svg.png'
 
 function NewSetlist(){
 
-
     const navigate = useNavigate()
     const {
         setlists,
@@ -140,11 +139,18 @@ function NewSetlist(){
                                         No
                                     </label>
                                 </div>
+                                { useSpotify === false || useSpotify === true ?
                                     <Button
                                         className="new-setlist--submit"
                                         type="submit"
                                         buttonText="Create Setlist"
                                     />
+                                    :
+                                    <DisabledButton
+                                    className="new-setlist--disabled"
+                                    buttonText="Create Setlist"
+                                    />
+                                }
                             </form>
                             :
                             <div className="new-setlist--maximum">

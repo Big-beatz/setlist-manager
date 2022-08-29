@@ -8,6 +8,7 @@ function UserContextProvider({children}){
     const [spotifyToken, setSpotifyToken] = useState({hasToken: false, token:'', refreshToken: ''})
     const [setlists, updateSetlists] = useState([])
     const [deviceID, setDeviceID] = useState('')
+    const [userID, setUserID] = useState('')
     const [playSong, togglePlaySong] = useState(false)
     const [pauseSong, togglePauseSong] = useState(false)
     const [createSetlist, toggleCreateSetlist] = useState()
@@ -123,22 +124,33 @@ function UserContextProvider({children}){
 
     useEffect(() => {
         if (spotifyToken.hasToken){
-            async function getDeviceID() {
+            async function getDeviceID(){
                 try {
                     const {data} = await axios.get('https://api.spotify.com/v1/me/player/devices', {
                             headers: {
                                 "Authorization": `Bearer ${spotifyToken.token}`
-                            }
-                        }
-                    )
+                            }}
+                            )
                     const findDeviceIndex = data.devices.indexOf("Computer")
-                    console.log(data)
                     setDeviceID(data.devices[findDeviceIndex + 1].id)
-
                 } catch (e) {
                     console.error(e)
                 }
-            }getDeviceID()
+            }
+            getDeviceID()
+            async function getUserID(){
+                try{
+                    const {data} = await axios.get('https://api.spotify.com/v1/me', {
+                        headers: {
+                            "Authorization": `Bearer ${spotifyToken.token}`
+                        }}
+                        )
+                    setUserID(data.id)
+                } catch(e){
+                    console.error(e)
+                }
+            }
+            getUserID()
         }}, [spotifyToken.hasToken])
 
     useEffect(() => {
@@ -189,6 +201,7 @@ function UserContextProvider({children}){
                 } catch (e) {
                     console.error(e)
                     togglePlaySong(false)
+                    togglePauseSong(false)
                 }
             } pause()
             }}, [pauseSong])
@@ -218,7 +231,8 @@ function UserContextProvider({children}){
         useSpotify: useSpotify,
         setUseSpotify: setUseSpotify,
         accessCode: accessCode,
-        deviceID: deviceID
+        deviceID: deviceID,
+        userID: userID
     }
 
     return(

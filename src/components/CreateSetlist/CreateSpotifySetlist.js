@@ -42,35 +42,41 @@ function CreateSpotifySetlist(){
         }
     }
 
+    console.log(newSong)
+    console.log(songsArray)
+
     useEffect(() => {
-        async function searchQuery() {
-            if (newSong.length === 0) {
-                setInvalidInput(false)
-            } else if (newSong.indexOf(' ') === 0) {
-                setInvalidInput(true)
-                setSearchResults([])
-            } else {
-                try {
-                    const {data: {tracks: {items}}} = await axios.get(`https://api.spotify.com/v1/search?${
-                        querystring.stringify({
-                            q: newSong,
-                            type: "track,artist",
-                            limit: 5,
-                            market: "NL"
-                        })}`, {
-                        headers: {
-                            "Authorization": `Bearer ${spotifyToken.token}`,
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        json: true
-                    })
-                    console.log(spotifyToken.token)
-                    return setSearchResults(items)
-                } catch (e) {
-                    console.error(e.response.data.error)
+        if (useSpotify) {
+            async function searchQuery() {
+                if (newSong.length === 0) {
+                    setInvalidInput(false)
+                } else if (newSong.indexOf(' ') === 0) {
+                    setInvalidInput(true)
+                    setSearchResults([])
+                } else {
+                    try {
+                        const {data: {tracks: {items}}} = await axios.get(`https://api.spotify.com/v1/search?${
+                            querystring.stringify({
+                                q: newSong,
+                                type: "track,artist",
+                                limit: 5,
+                                market: "NL"
+                            })}`, {
+                            headers: {
+                                "Authorization": `Bearer ${spotifyToken.token}`,
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            json: true
+                        })
+                        console.log(spotifyToken.token)
+                        return setSearchResults(items)
+                    } catch (e) {
+                        console.error(e.response.data.error)
+                    }
                 }
             }
-        } searchQuery()
+            searchQuery()
+        }
     }, [newSong])
 
 
@@ -133,42 +139,43 @@ function CreateSpotifySetlist(){
                 />
             </header>
             <main className="setlist-creator--main">
-                <>
                     <form
                         className="setlist-creator--form"
-                        onSubmit={e => e.preventDefault}
+                        onSubmit={pushToSongsArray}
                     >
                         <div className="setlist-creator--search-result-div">
+                            {useSpotify ?
+                            <input
+                                className="setlist-creator--search-input"
+                                type="text"
+                                value={newSong}
+                                onChange={e => setNewSong(e.target.value)}
+                            />
+                            :
                             <div className="setlist-creator--div">
-                                {useSpotify ?
-                                    <DisabledButton
-                                        className="setlist-creator--add-button"
-                                        buttonText="Add"
-                                    />
-                                    :
-                                    <Button
-                                        className="setlist-creator--add-button"
-                                        buttonText="Add"
-                                    />
-                                }
+                                <Button
+                                    className="setlist-creator--add-button"
+                                    buttonText="Add"
+                                />
                                 <input
-                                    className="setlist-creator--search-input"
+                                    className="setlist-creator--input"
                                     type="text"
-                                    id="setlist-song"
                                     value={newSong}
                                     onChange={e => setNewSong(e.target.value)}
                                 />
                             </div>
+                            }
+                            {useSpotify &&
                             <div>
                                 <ul
                                     className="setlist-creator--ul"
                                 >
-                                {newSong.length >= 1 &&
-                                searchResults.map((result, index) => {
-                                    return <li
-                                        className="setlist-creator--li"
-                                        key={index}
-                                        onClick={() => pushToSpotifyArray(result.name, result.artists[0].name, result.uri)}
+                                    {newSong.length >= 1 &&
+                                    searchResults.map((result, index) => {
+                                        return <li
+                                            className="setlist-creator--li"
+                                            key={index}
+                                            onClick={() => pushToSpotifyArray(result.name, result.artists[0].name, result.uri)}
                                         >
                                             <img src={result.album.images[0].url}
                                                  alt="album image"
@@ -176,17 +183,18 @@ function CreateSpotifySetlist(){
                                             />
                                             <div>
                                                 <p className="setlist-creator--result-track">
-                                                {result.name}
+                                                    {result.name}
                                                 </p>
                                                 <p className="setlist-creator--result-artist">
                                                     {result.artists[0].name}
                                                 </p>
                                             </div>
                                         </li>
-                                })
-                                }
+                                    })
+                                    }
                                 </ul>
                             </div>
+                            }
                         </div>
                     </form>
                     <div className="setlist-creator--right-column">
@@ -216,55 +224,72 @@ function CreateSpotifySetlist(){
                             }
                             {(songsArray.length >= 1) &&
                                 songsArray.map((songArray, index) => {
-                                    return <li
-                                        className="setlist-creator--li"
-                                        key={songArray.trackUri}
-                                            >
-                                        {index +1}. {songArray.track} - {songArray.artist}
-                                        <div
-                                        className="setlist-creator--button-div"
+                                    if (useSpotify) {
+                                        return <li
+                                            className="setlist-creator--li"
+                                            key={songArray.trackUri}
                                         >
-                                        {playSong === true && deviceID ?
+                                            {index + 1}. {songArray.track} - {songArray.artist}
+                                            <div
+                                                className="setlist-creator--button-div"
+                                            >
+                                                {playSong === true && deviceID ?
+                                                    <Button
+                                                        className="setlist-creator--play-pause-button"
+                                                        buttonText={<img src={pauseButton} alt="play pause button"/>}
+                                                        onClick={() => handlePlay(songArray.trackUri)}
+                                                    />
+                                                    :
+                                                    <Button
+                                                        className="setlist-creator--play-pause-button"
+                                                        buttonText={<img src={playButton} alt="play pause button"/>}
+                                                        onClick={() => handlePlay(songArray.trackUri)}
+                                                    />
+                                                }
+                                                <Button
+                                                    className="setlist-creator--delete-button"
+                                                    type="button"
+                                                    onClick={() => {
+                                                        deleteButtonHandler(index)
+                                                    }}
+                                                    buttonText="X"
+                                                />
+                                            </div>
+                                        </li>
+                                    } else {
+                                        return <li
+                                            className="setlist-creator--li"
+                                        >
+                                            {index + 1}. {songArray}
                                             <Button
-                                                className="setlist-creator--play-pause-button"
-                                                buttonText={<img src={pauseButton} alt="play pause button"/>}
-                                                onClick={() => handlePlay(songArray.trackUri)}
+                                                className="setlist-creator--delete-button"
+                                                type="button"
+                                                onClick={() => {
+                                                    deleteButtonHandler(index)
+                                                }}
+                                                buttonText="X"
                                             />
-                                            :
-                                            <Button
-                                                className="setlist-creator--play-pause-button"
-                                                buttonText={<img src={playButton} alt="play pause button"/>}
-                                                onClick={() => handlePlay(songArray.trackUri)}
-                                            />
-                                        }
-                                        <Button
-                                            className="setlist-creator--delete-button"
-                                            type="button"
-                                            onClick={() => {deleteButtonHandler(index)}}
-                                            buttonText="X"
-                                        />
-                                        </div>
-                                    </li>
+                                        </li>
+                                    }
                                 })
                             }
                         </ol>
                     </div>
-                </>
             </main>
             <footer className="setlist-creator--footer">
                 {songsArray.length === 0 || nameOfSetlist.length === 0 ?
-                 <DisabledButton
-                 buttonText="Finish"
-                 className="setlist-creator--finish-button__disabled"
-                 />
+                    <DisabledButton
+                        buttonText="Finish"
+                        className="setlist-creator--finish-button__disabled"
+                    />
                     :
-                <Button
-                    type="button"
-                    className="setlist-creator--finish-button"
-                    buttonText="Finish"
-                    onClick={finishButton}
-                />
-                    }
+                    <Button
+                        type="button"
+                        className="setlist-creator--finish-button"
+                        buttonText="Finish"
+                        onClick={finishButton}
+                    />
+                }
             </footer>
         </div>
     )

@@ -66,10 +66,10 @@ function MySetlists(){
                                 </section>
                                 :
                                 <>
-                                    {setlists.map((setlist, index) => {
-                                        return (
-                                            <section className="my-setlists--section">
-                                            <span className="my-setlists--span">
+                                {setlists.map((setlist, index) => {
+                                    return (
+                                        <section className="my-setlists--section">
+                                            <span className="my-setlists--buttons">
                                                 <Button
                                                     className="my-setlists--open-button"
                                                     onClick={() => toggleOpenSetlist({
@@ -79,27 +79,35 @@ function MySetlists(){
                                                     })}
                                                     buttonText={setlist.setlistName}
                                                 />
-                                                <span>
-                                                    {setlist.useSpotify &&
-                                                    <img src={spotifyIcon} alt="Spotify Icon"
-                                                         className="my-setlists--img"
-                                                    />
-                                                    }
-                                                    <Button
-                                                        buttonText="X"
-                                                        className="my-setlists--close-button"
-                                                        onClick={() => deleteButtonHandler(index)}
-                                                    />
-                                                </span>
+                                                <Button
+                                                    buttonText="Delete"
+                                                    className="my-setlists--delete-button"
+                                                    onClick={() => deleteButtonHandler(index)}
+                                                />
                                             </span>
+                                            <span className="my-setlists--span">
                                                 <ol>
-                                                    {setlist.setlistArray.slice(0, 3).map((setlistPreview) => {
-                                                        return <li>{setlistPreview.track} - {setlistPreview.artist}</li>
-                                                    })}
+                                                {setlist.setlistArray.slice(0, 3).map((setlistPreview) => {
+                                                    if(setlistPreview.track) {
+                                                        return <li>
+                                                            {setlistPreview.track} - {setlistPreview.artist}
+                                                        </li>
+                                                    } else{
+                                                        return <li>
+                                                            {setlistPreview}
+                                                        </li>
+                                                    }
+                                                })}
                                                 </ol>
-                                            </section>
-                                        )
-                                    })}
+                                                {setlist.useSpotify &&
+                                                <img src={spotifyIcon} alt="Spotify Icon"
+                                                     className="my-setlists--img"
+                                                />
+                                                }
+                                            </span>
+                                        </section>
+                                    )
+                                })}
                                 </>
                             }
                         </div>

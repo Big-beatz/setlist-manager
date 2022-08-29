@@ -29,3 +29,23 @@ p{
   margin: 0px;
   padding: 0px;
 }
+
+::-webkit-scrollbar{
+  width: 10px;
+  border-radius: 7px;
+}
+::-webkit-scrollbar-track{
+  background: #d2d2d2;
+  border-radius: 7px;
+}
+::-webkit-scrollbar-thumb{
+  background: #7c7c7c;
+  border-radius: 7px;
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: #7c7c7c #d2d2d2;
+    scrollbar-width: thin;
+  }
+}

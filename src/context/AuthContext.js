@@ -16,6 +16,7 @@ function AuthContextProvider({children}) {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
+        console.log(authState)
         const currentTime = new Date().getTime().valueOf() / 1000
         if (token) {
             const decodedToken = jwtDecode(token)
@@ -51,6 +52,14 @@ function AuthContextProvider({children}) {
                     }
                 }
                 getUser()
+            } else{
+                localStorage.clear()
+                setAuthState({
+                    ...authState,
+                    user:null,
+                    isAuth: false,
+                    authStatus: 'done'
+                })
             }
         } else {
             setAuthState({
@@ -60,7 +69,8 @@ function AuthContextProvider({children}) {
                 authStatus: 'done'
             })
         }
-    }, [token])
+    }, [])
+
 
     function logout() {
         localStorage.clear()
@@ -69,7 +79,6 @@ function AuthContextProvider({children}) {
             user: null,
             isAuth: false,
             authStatus: 'done',
-
         })
         sessionStorage.clear()
         navigate('/login')
