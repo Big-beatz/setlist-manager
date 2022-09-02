@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Button, DisabledButton} from "../../components/Button/Button";
 import {useNavigate} from "react-router-dom";
 import Background from "../../components/Background/Background";
@@ -6,11 +6,12 @@ import './Register.scss'
 import axios from 'axios'
 import RegisterStatus from "../../components/RegisterStatus/RegisterStatus";
 import Input from "../../components/Input/Input";
+import {UserContext} from "../../context/UserContext/UserContext";
 
 function Register(){
+    const {error, toggleError} = useContext(UserContext)
     const navigate = useNavigate();
     const [loading, toggleLoading] = useState(false)
-    const [error, toggleError] = useState(false)
     const [validInput, setValidInput] = useState(false)
     const [registerStatus, setRegisterStatus] = useState(false)
     const [userRegistration, setUserRegistration] = useState({
@@ -19,7 +20,6 @@ function Register(){
         password: '',
         passwordAgain: ''
     })
-
 
     useEffect(() =>{
         if(userRegistration.mailadres.includes("@") &&
@@ -34,21 +34,25 @@ function Register(){
 
     async function reguestRegistration() {
         try {
+            toggleLoading(true)
             const data = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
                 "username": userRegistration.username,
                 "email": userRegistration.mailadres,
                 "password": userRegistration.password,
                 "role": ["user"]
             })
-            toggleLoading(true)
             if (data.status === 200){
                 setRegisterStatus(true)
+                toggleLoading(false)
             }
         } catch (e) {
-            toggleError(true)
+            toggleError({
+                ...error,
+                registerError: true
+            })
+            toggleLoading(false)
             console.error(e)
         }
-        toggleLoading(false)
     }
 
     function handleChange(e){
@@ -56,17 +60,21 @@ function Register(){
             ...userRegistration,
             [e.target.name]: e.target.value})
     }
+
     function handleRegister(e) {
         e.preventDefault()
         reguestRegistration()
     }
-    function clearRegistration(){
-        setUserRegistration({...userRegistration, username: '', passwordAgain: '', mailadres: '', password: ''})
+
+    function cancelRegistration(){
+        setUserRegistration({
+            ...userRegistration,
+            username: '',
+            passwordAgain: '',
+            mailadres: '',
+            password: ''
+        })
         toggleError(false)
-    }
-    function toLogin(){
-        setRegisterStatus(false)
-        navigate('/login')
     }
 
     return(
@@ -75,21 +83,23 @@ function Register(){
             classNameCenter="background-center"
             classNameBottom="background-bottom"
             topContent={
-            <>
-                <h1 className="setlist">Setlist</h1>
-                <h1 className="manager">Manager</h1>
-            < />
+                <header className="register--header">
+                    <h1 className="setlist">
+                        Setlist
+                    </h1>
+                    <h1 className="manager">
+                        Manager
+                    </h1>
+                </header>
             }
             centerContent={
-            <>
-                <div className="registerContainer">
-                    {registerStatus || error ?
+                <main className="register--main">
+                    {registerStatus || error.registerError ?
                     <RegisterStatus
-                        error={error}
+                        error={error.registerError}
                         registerStatus={registerStatus}
                         userName={userRegistration.username}
-                        clearRegistration={clearRegistration}
-                        toLogin={toLogin}
+                        clearRegistration={cancelRegistration}
                     />
                     :
                     <>
@@ -142,7 +152,9 @@ function Register(){
                                 inputName="passwordAgain"
                                 onChange={handleChange}
                             />
-                            {loading && <p>...Loading</p>}
+                            {loading &&
+                            <p>...Loading</p>
+                            }
                             { validInput ?
                                 <Button
                                     type="submit"
@@ -158,22 +170,21 @@ function Register(){
                         </form>
                     </>
                     }
-                </div>
-            </>
+                </main>
             }
             bottomContent={
-            <>
-                {(!registerStatus && !error) &&
+                <footer className="register--footer">
+                    {(!registerStatus && !error.registerError) &&
                     <Button
                         type="button"
                         className="registerButton--cancel-register"
                         onClick={() => {
-                        navigate("/login")
+                            navigate("/login")
                         }}
                         buttonText="Cancel"
                     />
-                }
-            </>
+                    }
+                </footer>
             }
         />
     )

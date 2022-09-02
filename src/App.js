@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Routes, Route, Navigate, useNavigate, Redirect, Router} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import './App.scss';
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
@@ -7,12 +7,9 @@ import MySetlists from "./pages/mySetlists/MySetlists";
 import NewSetlist from "./pages/newSetlist/NewSetlist";
 import Homepage from "./pages/home/Homepage";
 import Register from "./pages/Register/Register";
-import CreateSetlist from "./components/CreateSetlist/CreateSpotifySetlist";
-import {AuthContext} from "./context/AuthContext";
+import CreateSetlist from "./components/CreateSetlist/CreateSetlist";
 
 function App() {
-    const navigate = useNavigate()
-    const {authState} = useContext(AuthContext)
 
     return (
         <>

@@ -41,9 +41,9 @@ body {
         flex-shrink: 0;
       }
 
-      .background-top__large{
-        height: 70%;
+      .background-top__large-grow{
         width: 100%;
+        height: 70%;
         color: $yellow;
         background-color: $red;
         box-shadow: $yellow-shadow;
@@ -52,8 +52,24 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-grow: 12;
+        flex-grow: 1;
         flex-shrink: 0;
+        animation: background-large-grow 1s ease-in;
+      }
+      .background-top__large-shrink{
+        width: 100%;
+        height: 33%;
+        color: $yellow;
+        background-color: $red;
+        box-shadow: $yellow-shadow;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 0;
+        animation: background-large-shrink 1s ease-in;
       }
 
       .background-center {
@@ -67,11 +83,12 @@ body {
         align-items: center;
         flex-grow: 1;
         flex-shrink: 0;
+        //animation: background-grow 0.5s;
       }
 
-      .background-center__large {
-        height: 70%;
+      .background-center__large-grow {
         width: 100%;
+        height: 70%;
         background-color: $yellow;
         box-shadow: $blue-shadow;
         z-index: 1;
@@ -79,8 +96,23 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        flex-grow: 12;
+        flex-grow: 1;
         flex-shrink: 0;
+        animation: background-large-grow 1s ease-in;
+      }
+      .background-center__large-shrink {
+        width: 100%;
+        height: 70%;
+        background-color: $yellow;
+        box-shadow: $blue-shadow;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        flex-shrink: 0;
+        animation: background-large-shrink 1s ease-in;
       }
 
       .background-bottom {
@@ -95,17 +127,31 @@ body {
         align-items: center;
       }
 
-      .background-bottom__large {
-        height: 70%;
+      .background-bottom__large-grow {
         width: 100%;
+        height: 70%;
         background-color: $blue;
         z-index: 0;
-        flex-grow: 12;
+        flex-grow: 1;
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        animation: background-large-grow 1s ease-in;
+      }
+      .background-bottom__large-shrink {
+        width: 100%;
+        height: 70%;
+        background-color: $blue;
+        z-index: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        animation: background-large-shrink 1s ease-in;
       }
     }
   }

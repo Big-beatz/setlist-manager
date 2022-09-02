@@ -10,16 +10,22 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-.setlist, .manager{
-  color: $yellow;
-  text-shadow: $header-lining, $red-shadow;
-  font-size: xxx-large;
+.register--header {
+  animation: fade-in 1s;
+  .setlist, .manager {
+    color: $yellow;
+    text-shadow: $header-lining, $red-shadow;
+    font-size: xxx-large;
+  }
 }
-.registerContainer {
+
+.register--main {
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 100%;
+  animation: fade-in 1s;
+
   .register-form__h2 {
     color: $blue;
     font-size: x-large;
@@ -32,6 +38,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     border-radius: 5px;
   }
 }
+
 .register-form {
   font-family: $fascinate;
   font-size: x-large;
@@ -66,26 +73,36 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     max-width: 250px;
     &:hover:not(.register-form--button__disabled) {
       background-color: $yellow;
-      color: $blue
+      color: $red;
+      cursor: pointer;
+      animation: hoverLogin 0.5s ease-in;
     }
   }
   .register-form--button__disabled{
     filter: blur(2px);
   }
 }
-.registerButton--cancel-register{
-  font-family: $fascinate;
-  color: $yellow;
-  background-color: $red;
-  outline: none;
-  border: solid;
-  border-radius: 7px;
-  font-size: xx-large;
-  box-shadow: $blue-shadow;
-  align-self: flex-end;
-  margin: 3% 10% 10% 3%;
-  &:hover {
-    background-color: $yellow;
-    color: $red;
-    }
-      }
+.register--footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 10%;
+  animation: fade-in 1s;
+  .registerButton--cancel-register {
+   font-family: $fascinate;
+   color: $yellow;
+   background-color: $red;
+   outline: none;
+   border: solid;
+   border-radius: 7px;
+   font-size: xx-large;
+   box-shadow: $blue-shadow;
+   &:hover {
+     background-color: $yellow;
+     color: $red;
+     animation: hoverLogin 0.5s ease-in;
+   }
+ }
+}

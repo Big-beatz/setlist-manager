@@ -1,22 +1,27 @@
 import React from 'react'
 import './Background.scss'
-import Navbar from "../Navbar/Navbar";
 
-function Background(props){
+function Background({
+                classNameTop,
+                topContent,
+                classNameCenter,
+                centerContent,
+                classNameBottom,
+                bottomContent
+                })
+{
     return(
-        <div className="background-container">
             <div className="background">
-                <div className={props.classNameTop}>
-                    {props.topContent}
+                <div className={classNameTop}>
+                    {topContent}
                 </div>
-                <div className={props.classNameCenter}>
-                    {props.centerContent}
+                <div className={classNameCenter}>
+                    {centerContent}
                 </div>
-                <div className={props.classNameBottom}>
-                    {props.bottomContent}
+                <div className={classNameBottom}>
+                    {bottomContent}
                 </div>
             </div>
-        </div>
         )
 }
 

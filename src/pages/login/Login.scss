@@ -10,23 +10,34 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-
-.setlist, .manager {
+.startup-logo--h1{
+  color: $yellow;
+  text-shadow: none;
+  font-size: xx-large;
+  animation: startup-logo 2s;
+}
+.login--header {
+  animation: fade-in 1s;
+  .setlist, .manager {
     color: $yellow;
     text-shadow: $header-lining, $red-shadow;
     font-size: xxx-large;
   }
+}
+
 .loginContainer {
   display: flex;
   flex-direction: column;
   justify-content: left;
   width: 100%;
+  animation: fade-in 1s;
   .login__h2 {
     color: $blue;
     font-size: xx-large;
     text-shadow: $content-lining;
     box-shadow: $yellow-shadow;
-    margin: 5% 10% 3%;
+    margin-left: 10%;
+    margin-bottom: 3%;
     display: inline-block;
     padding: 5px;
     border: $blue solid 5px;
@@ -44,7 +55,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   padding: 7px;
   display: flex;
   flex-direction: column;
-  margin: 0 0 2% 10%;
+  margin-left: 10%;
   width: 70%;
   max-width: 700px;
   .login-error-message{
@@ -67,23 +78,32 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     max-width: 250px;
     &:hover {
       background-color: $yellow;
-      color: $blue
+      color: $red;
+      animation: hoverLogin 0.5s ease-in;
     }
   }
 }
-    .registerButton--start-register{
-      font-family: $fascinate;
-      color: $yellow;
-      background-color: $red;
-      outline: none;
-      border: solid;
-      border-radius: 7px;
-      font-size: xx-large;
-      box-shadow: $blue-shadow;
-      align-self: flex-end;
-      margin: 3% 10% 10% 3%;
-      &:hover {
-        background-color: $yellow;
-        color: $red;
-      }
+.login--footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  animation: fade-in 1s;
+  .registerButton--start-register {
+    font-family: $fascinate;
+    color: $yellow;
+    background-color: $red;
+    outline: none;
+    border: solid;
+    border-radius: 7px;
+    margin-right: 10%;
+    font-size: xx-large;
+    box-shadow: $blue-shadow;
+    &:hover {
+      background-color: $yellow;
+      color: $red;
+      animation: hoverLogin 0.5s ease-in;
     }
+  }
+}
+

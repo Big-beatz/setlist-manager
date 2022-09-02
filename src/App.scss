@@ -30,6 +30,24 @@ p{
   padding: 0px;
 }
 
+.navigation--fade-in{
+  width: 100%;
+  display: flex;
+  animation: fade-in 1s ease-out;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation--fade-out{
+  width: 100%;
+  animation: fade-out 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 ::-webkit-scrollbar{
   width: 10px;
   border-radius: 7px;
@@ -47,5 +65,143 @@ p{
   * {
     scrollbar-color: #7c7c7c #d2d2d2;
     scrollbar-width: thin;
+  }
+}
+
+@keyframes background-grow {
+  from{
+    flex-grow: 0.0001;
+  }
+  to {
+    flex-grow: 1
+  }
+}
+@keyframes background-large-grow{
+  from{
+    height: 10%;
+  }
+  to{
+    height: 70%;
+  }
+}
+@keyframes background-large-shrink{
+  from{
+    height: 70%;
+  }
+  to{
+    height: 10%;
+  }
+}
+@keyframes hoverLogin{
+  from{
+    background-color: $red;
+    color: $yellow;
+  }
+  to{
+    background-color: $yellow;
+    color: $red;
+  }
+}
+
+@keyframes hoverMySetlists{
+  from{
+    background-color: $yellow;
+    color: $blue;
+  }
+  to{
+    background-color: $blue;
+    color: $yellow;
+  }
+}
+@keyframes hoverNewSetlist{
+  from{
+    background-color: $blue;
+    color: $yellow;
+  }
+  to{
+    background-color: $yellow;
+    color: $blue;
+  }
+}
+
+@keyframes hoverCreateSetlist{
+  from{
+    background-color: $yellow;
+    color: black;
+  }
+  to{
+    background-color: black;
+    color: $yellow;
+  }
+}
+
+@keyframes hoverLogout{
+  from{
+    background-color: $red;
+    color: $yellow;
+  }
+  to{
+    background-color: $yellow;
+    color: $blue;
+  }
+}
+@keyframes fade-in{
+  from {
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+@keyframes fade-out{
+  from {
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+@keyframes startup-logo {
+  0% {
+    color: $yellow;
+    text-shadow: $header-lining, $yellow-shadow;
+    font-size: large;
+  }
+  50% {
+    color: $red;
+    text-shadow: $header-lining, $yellow-shadow;
+    font-size: xx-large;
+  }
+  100% {
+    color: $yellow;
+    text-shadow: none;
+    font-size: large;
+  }
+}
+
+@keyframes renderInContentProfile{
+  from{
+    height: 0%;
+  }
+  to{
+    height: 60%;
+  }
+}
+
+@keyframes renderInContent{
+  from{
+    height: 0%;
+  }
+  to{
+    height: 80%;
+  }
+}
+@keyframes renderOutContent{
+  from{
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
   }
 }

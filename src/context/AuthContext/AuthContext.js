@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useState} from "react";
 import axios from 'axios'
 import jwtDecode from "jwt-decode";
 import {useNavigate} from "react-router-dom";
+import Background from "../../components/Background/Background";
 
 export const AuthContext = createContext({})
 
@@ -16,7 +17,6 @@ function AuthContextProvider({children}) {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        console.log(authState)
         const currentTime = new Date().getTime().valueOf() / 1000
         if (token) {
             const decodedToken = jwtDecode(token)
@@ -30,17 +30,31 @@ function AuthContextProvider({children}) {
                                     "Authorization": `Bearer ${token}`,
                                 }
                             })
-                        setAuthState({
-                            ...authState,
-                            user: {
-                                username: data.username,
-                                mail: data.email,
-                                id: data.id
-                            },
-                            authStatus: 'done',
-                            isAuth: true
-                        })
-                        console.log(data)
+                        if(data.info){
+                            setAuthState({
+                                ...authState,
+                                user: {
+                                    username: data.username,
+                                    mail: data.email,
+                                    id: data.id,
+                                    info: JSON.parse(data.info)
+                                },
+                                authStatus: 'done',
+                                isAuth: true
+                            })
+                        } else {
+                            setAuthState({
+                                ...authState,
+                                user: {
+                                    username: data.username,
+                                    mail: data.email,
+                                    id: data.id,
+                                    info: []
+                                },
+                                authStatus: 'done',
+                                isAuth: true
+                            })
+                        }
                     } catch (e) {
                         console.error(e)
                         setAuthState({
@@ -71,7 +85,6 @@ function AuthContextProvider({children}) {
         }
     }, [])
 
-
     function logout() {
         localStorage.clear()
         setAuthState({
@@ -87,12 +100,24 @@ function AuthContextProvider({children}) {
     const authData = {
             authState: authState,
             setAuthState: setAuthState,
-            logout: logout
+            logout: logout,
+            token: token
         }
 
     return (
         <AuthContext.Provider value={authData}>
-            {authState.authStatus === 'done' ? children : <p>Loading</p>}
+            {authState.authStatus === 'done' ?
+                children
+            :
+            <Background
+                classNameTop="background-top"
+                classNameCenter="background-center"
+                classNameBottom="background-bottom"
+                centerContent={
+                   <h1>Loading</h1>
+                }
+            />
+            }
         </AuthContext.Provider>
     )
 }

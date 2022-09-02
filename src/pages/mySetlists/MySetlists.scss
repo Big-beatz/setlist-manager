@@ -9,84 +9,119 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-.my-setlists--content{
+.my-setlists__fade-in {
+  height: 100%;
   width: 100%;
-  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  .my-setlists--header{
+  animation: fade-in 1.5s ease-in;
+}
+.my-setlists__fade-out {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fade-out 1s ease-in;
+}
+
+  .my-setlists--header {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  .my-setlists--div {
-    display: flex;
-    margin: 10%;
-    max-height: 80%;
+
+  .my-setlists--content-render-in {
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    .my-setlists--section {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: renderInContent 1s ease-out;
+  }
+  .my-setlists--content-render-out {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: renderOutContent 1.5s ease-out;
+  }
+    .my-setlists--div {
       display: flex;
-      flex-direction: column;
-      width: 40%;
-      max-height: 100%;
-      margin: 5px;
-      background-color: white;
-      padding: 5px;
-      border: gray solid 1px;
-      border-radius: 7px;
-      box-shadow: $yellow-shadow;
-      .my-setlists--buttons{
-        border-bottom: black 1px solid;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+
+      .my-setlists--section {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        .my-setlists--open-button{
-          background-color: white;
-          font-family: $fascinate;
-          font-size: 130%;
-          width: 70%;
-          max-width:80%;
-          text-align: start;
-          border: none;
-          border-radius: 7px;
-          &:hover{
-            cursor: pointer;
-            background-color: black;
-            color: white;
+        flex-direction: column;
+        width: 40%;
+        max-height: 100%;
+        margin: 5px;
+        background-color: white;
+        padding: 5px;
+        border: gray solid 1px;
+        border-radius: 7px;
+        box-shadow: $yellow-shadow;
+        animation: fade-in 1.5s ease-out;
+
+        .my-setlists--buttons {
+          border-bottom: black 1px solid;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .my-setlists--open-button {
+            background-color: white;
+            font-family: $fascinate;
+            font-size: 130%;
+            width: 70%;
+            max-width: 80%;
+            text-align: start;
+            border: none;
+            border-radius: 7px;
+
+            &:hover {
+              cursor: pointer;
+              background-color: black;
+              color: white;
+            }
           }
-        }
-        .my-setlists--delete-button{
-          background: white;
-          color: $red;
-          font-size: 100%;
-          border: $red 5px solid;
-          border-radius: 7px;
-          font-family: $fascinate;
-          &:hover{
-            background: $red;
-            color: white;
+
+          .my-setlists--delete-button {
+            background: white;
+            color: $red;
             font-size: 100%;
+            border: $red 5px solid;
             border-radius: 7px;
             font-family: $fascinate;
+
+            &:hover {
+              background: $red;
+              color: white;
+              font-size: 100%;
+              border-radius: 7px;
+              font-family: $fascinate;
+            }
           }
         }
-      }
-      .my-setlists--span{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      .my-setlists--img{
-        max-height: 25px;
-        max-width: 25px;
-        align-self: end;
+
+        .my-setlists--span {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .my-setlists--img {
+          max-height: 25px;
+          max-width: 25px;
+          align-self: end;
+        }
       }
     }
-  }
-}

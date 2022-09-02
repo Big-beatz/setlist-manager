@@ -10,73 +10,108 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
-
-.new-setlist {
+.new-setlist__fade-in {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  animation: fade-in 1.5s ease-in;
+}
+.new-setlist__fade-out {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  animation: fade-out 1s ease-in;
+}
 
-  .new-setlist--maximum{
-    padding: 5px;
-    color: $yellow;
-    border: $yellow 5px solid;
-    border-radius: 7px;
-    box-shadow: $blue-shadow;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .new-setlist--form {
-    font-size: 160%;
-    width: 60%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    font-family: $fascinate;
-    color: $yellow;
-    .new-setlist--legend {
+.new-setlist-content__render-in {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  animation: renderInContent 1s ease-out;
+}
+.new-setlist-content__render-out {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  animation: renderOutContent 1s ease-out;
+}
+    .new-setlist--maximum {
+      padding: 5px;
+      color: $yellow;
+      border: $yellow 5px solid;
+      border-radius: 7px;
+      box-shadow: $blue-shadow;
       display: flex;
-      justify-content: space-between;
-      .new-setlist--img {
-        max-height: 50px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .new-setlist--form {
+      font-size: 160%;
+      height: 100%;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      font-family: $fascinate;
+      color: $yellow;
+      .new-setlist--legend {
+        display: flex;
+        justify-content: space-between;
+
+        .new-setlist--img {
+          max-height: 50px;
+        }
+      }
+
+      .new-setlist--submit {
+        color: black;
+        background-color: $yellow;
+        font-family: $fascinate;
+        font-size: 120%;
+        text-shadow: $content-lining;
+        box-shadow: $blue-shadow;
+        display: inline-block;
+        padding: 5px;
+        border: black solid 5px;
+        border-radius: 7px;
+        width: 100%;
+        &:hover {
+          color: $yellow;
+          background-color: black;
+          animation: hoverCreateSetlist 0.5s ease-in;
+        }
+      }
+
+      .new-setlist--disabled {
+        color: black;
+        background-color: $yellow;
+        font-family: $fascinate;
+        font-size: 120%;
+        text-shadow: $content-lining;
+        box-shadow: $blue-shadow;
+        display: inline-block;
+        padding: 5px;
+        border: black solid 5px;
+        border-radius: 7px;
+        width: 100%;
+        filter: blur(2px);
       }
     }
-    .new-setlist--submit {
-      color: black;
-      background-color: $yellow;
-      font-family: $fascinate;
-      font-size: 120%;
-      text-shadow: $content-lining;
-      box-shadow: $blue-shadow;
-      display: inline-block;
-      padding: 5px;
-      border: black solid 5px;
-      border-radius: 7px;
-      width: 100%;
-    }
 
-    .new-setlist--disabled {
-      color: black;
-      background-color: $yellow;
-      font-family: $fascinate;
-      font-size: 120%;
-      text-shadow: $content-lining;
-      box-shadow: $blue-shadow;
-      display: inline-block;
-      padding: 5px;
-      border: black solid 5px;
-      border-radius: 7px;
-      width: 100%;
-      filter: blur(2px);
-    }
-  }
-}
+
 
 
 

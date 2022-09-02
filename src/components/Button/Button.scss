@@ -9,7 +9,13 @@ $fascinate: 'Fascinate', sans-serif;
 $header-lining: -2px 0 black, 0 2px black, 3px 0 black, 0 -2px black;
 $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
+button{
+  &:hover{
+    cursor: pointer;
+  }
+}
 .profile-button{
+  justify-self: start;
   color: $yellow;
   background-color: $red;
   font-family: $fascinate;
@@ -24,6 +30,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   &:hover{
     background-color: $yellow;
     color: $red;
+    animation: hoverLogin 0.5s ease-in;
   }}
 
 .my-setlists-button{
@@ -41,6 +48,8 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   &:hover{
     background-color: $blue;
     color: $yellow;
+    animation: hoverMySetlists 0.5s ease-in;
+
   }}
 
 .new-setlist-button{
@@ -58,4 +67,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   &:hover{
     background-color: $yellow;
     color: $blue;
+    animation: hoverNewSetlist 0.5s ease-in;
+
   }}

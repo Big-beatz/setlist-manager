@@ -3,7 +3,7 @@ import {Button} from "../Button/Button";
 import {useNavigate} from "react-router-dom";
 import './RegisterStatus.scss'
 
-function RegisterStatus({registerStatus, error, userName, clearRegistration, toLogin}){
+function RegisterStatus({registerStatus, error, userName, clearRegistration}){
     const navigate = useNavigate();
 
     return(

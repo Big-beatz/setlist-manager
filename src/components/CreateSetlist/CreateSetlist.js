@@ -1,49 +1,32 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './CreateSetlist.scss'
 import {Button, DisabledButton} from "../Button/Button";
-import {useNavigate} from "react-router-dom";
-import {UserContext} from "../../context/UserContext";
+import {UserContext} from "../../context/UserContext/UserContext";
+import {AuthContext} from "../../context/AuthContext/AuthContext";
 import axios from "axios";
 import querystring from "querystring-es3";
-import playPauseIcon from '../../assets/icons/kisspng-button-download-icon-pause-button-png-file-5a757e559fc778.1273614115176494936545.png'
 import playButton from '../../assets/icons/play-button-icon-png-18917.jpg'
 import pauseButton from '../../assets/icons/61039.png'
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-function CreateSpotifySetlist(){
-    const navigate = useNavigate()
+function CreateSetlist({toggleCreateSetlist}){
+    const {token, setAuthState, authState} = useContext(AuthContext)
     const {
-        addSetlist,
-        spotifyToken,
+        setlists,
+        updateSetlists,
         playPause,
-        playSong,
-        toggleCreateSetlist,
-        trackUri,
-        setTrackUri,
         useSpotify,
         setUseSpotify,
-        deviceID
+        spotifyData,
+        error,
+        toggleError
     } = useContext(UserContext)
     const [nameOfSetlist, setNameOfSetlist] = useState('')
     const [songsArray, updateSongsArray] = useState([])
     const [newSong, setNewSong] = useState('')
     const [invalidInput, setInvalidInput] = useState(false)
     const [searchResults, setSearchResults] = useState([])
-
-    function pushToSongsArray(e) {
-        e.preventDefault()
-        if (newSong) {
-            if (newSong.indexOf(' ') === 0) {
-                setInvalidInput(true)
-            } else {
-                updateSongsArray((songsArray) => [...songsArray, newSong])
-                setNewSong('')
-                setInvalidInput(false)
-            }
-        }
-    }
-
-    console.log(newSong)
-    console.log(songsArray)
+    const [finish, toggleFinish] = useState(false)
 
     useEffect(() => {
         if (useSpotify) {
@@ -63,14 +46,21 @@ function CreateSpotifySetlist(){
                                 market: "NL"
                             })}`, {
                             headers: {
-                                "Authorization": `Bearer ${spotifyToken.token}`,
+                                "Authorization": `Bearer ${spotifyData.token}`,
                                 "Content-Type": "application/x-www-form-urlencoded"
                             },
                             json: true
                         })
-                        console.log(spotifyToken.token)
-                        return setSearchResults(items)
+                        toggleError({
+                            ...error,
+                            searchError: false
+                        })
+                        setSearchResults(items)
                     } catch (e) {
+                        toggleError({
+                            ...error,
+                            searchError: true
+                        })
                         console.error(e.response.data.error)
                     }
                 }
@@ -78,7 +68,6 @@ function CreateSpotifySetlist(){
             searchQuery()
         }
     }, [newSong])
-
 
     function pushToSpotifyArray(trackName, artistName, trackUri) {
         updateSongsArray((songsArray) => [...songsArray, {
@@ -90,9 +79,17 @@ function CreateSpotifySetlist(){
         setInvalidInput(false)
     }
 
-    function finishButton(){
-        addSetlist(nameOfSetlist, songsArray, useSpotify)
-        close()
+    function pushToSongsArray(e) {
+        e.preventDefault()
+        if (newSong) {
+            if (newSong.indexOf(' ') === 0) {
+                setInvalidInput(true)
+            } else {
+                updateSongsArray((songsArray) => [...songsArray, newSong])
+                setNewSong('')
+                setInvalidInput(false)
+            }
+        }
     }
 
     function close(){
@@ -108,17 +105,57 @@ function CreateSpotifySetlist(){
             ...songsArray.slice(index + 1)])
     }
 
-    function handlePlay(sendTrackUri){
-        if (trackUri){
-            setTrackUri('')
-            setTrackUri(sendTrackUri)
-            playPause()
+    function finishButton(){
+        if (setlists.length === 0) {
+            updateSetlists([{
+                setlistName: nameOfSetlist,
+                setlistArray: songsArray,
+                useSpotify: useSpotify
+            }])
+        } else {
+            updateSetlists([...setlists,
+                {setlistName: nameOfSetlist,
+                    setlistArray: songsArray,
+                    useSpotify: useSpotify
+                }])
         }
-        else {
-            setTrackUri(sendTrackUri)
-            playPause()
-        }
+        toggleFinish(true)
     }
+
+    useEffect(() =>{
+        async function updateUserInfo() {
+            if (finish) {
+                const jsonStringSetlists = JSON.stringify(setlists)
+                try {
+                    const {data} = await axios.put('https://frontend-educational-backend.herokuapp.com/api/user',
+                        {
+                            info: jsonStringSetlists
+                        }, {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            }
+                        })
+                    console.log(data)
+                    setAuthState({
+                        ...authState,
+                        user: {
+                            username: data.username,
+                            mail: data.email,
+                            id: data.id,
+                            info: JSON.parse(data.info)
+                        },
+                        authStatus: 'done',
+                        isAuth: true
+                    })
+                    toggleFinish(false)
+                    close()
+                } catch (e) {
+                    console.error(e)
+                }
+            }
+        }updateUserInfo()
+    },[finish])
 
     return(
         <div className="setlist-creator">
@@ -171,11 +208,12 @@ function CreateSpotifySetlist(){
                                     className="setlist-creator--ul"
                                 >
                                     {newSong.length >= 1 &&
-                                    searchResults.map((result, index) => {
+                                        React.Children.toArray(
+                                        searchResults.map((result) => {
                                         return <li
                                             className="setlist-creator--li"
-                                            key={index}
-                                            onClick={() => pushToSpotifyArray(result.name, result.artists[0].name, result.uri)}
+                                            onClick={() =>
+                                                pushToSpotifyArray(result.name, result.artists[0].name, result.uri)}
                                         >
                                             <img src={result.album.images[0].url}
                                                  alt="album image"
@@ -191,7 +229,7 @@ function CreateSpotifySetlist(){
                                             </div>
                                         </li>
                                     })
-                                    }
+                                        )}
                                 </ul>
                             </div>
                             }
@@ -233,17 +271,17 @@ function CreateSpotifySetlist(){
                                             <div
                                                 className="setlist-creator--button-div"
                                             >
-                                                {playSong === true && deviceID ?
+                                                {spotifyData.playSong === true && spotifyData.deviceID ?
                                                     <Button
                                                         className="setlist-creator--play-pause-button"
                                                         buttonText={<img src={pauseButton} alt="play pause button"/>}
-                                                        onClick={() => handlePlay(songArray.trackUri)}
+                                                        onClick={() => playPause(songArray.trackUri)}
                                                     />
                                                     :
                                                     <Button
                                                         className="setlist-creator--play-pause-button"
                                                         buttonText={<img src={playButton} alt="play pause button"/>}
-                                                        onClick={() => handlePlay(songArray.trackUri)}
+                                                        onClick={() => playPause(songArray.trackUri)}
                                                     />
                                                 }
                                                 <Button
@@ -276,6 +314,14 @@ function CreateSpotifySetlist(){
                         </ol>
                     </div>
             </main>
+            <ErrorMessage
+                playError={error.playError}
+                deviceError={error.deviceError}
+                userError={error.userError}
+                spotifyAuthError={error.spotifyAuthError}
+                spotifyRefreshError={error.spotifyRefreshError}
+                searchError={error.searchError}
+            />
             <footer className="setlist-creator--footer">
                 {songsArray.length === 0 || nameOfSetlist.length === 0 ?
                     <DisabledButton
@@ -295,4 +341,4 @@ function CreateSpotifySetlist(){
     )
 }
 
-export default CreateSpotifySetlist
+export default CreateSetlist

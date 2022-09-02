@@ -1,57 +1,58 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Button, DisabledButton} from "../Button/Button";
-import {UserContext} from "../../context/UserContext";
+import {UserContext} from "../../context/UserContext/UserContext";
 import "./OpenSetlist.scss"
 import pauseButton from "../../assets/icons/61039.png";
 import playButton from "../../assets/icons/play-button-icon-png-18917.jpg";
 import axios from "axios";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 
 function OpenSetlist({index, toggleOpenSetlist}){
     const {
         setlists,
-        playSong,
-        trackUri,
-        setTrackUri,
-        playPause,
-        userID,
-        spotifyToken
+        spotifyData,
+        error,
+        toggleError,
+        playPause
     } = useContext(UserContext)
     const [createSpotifyPlaylist, toggleCreateSpotifyPlaylist] = useState(false)
     const [playlistID, setPlaylistID] = useState('')
     const [loading, toggleLoading] = useState(false)
     const [success, toggleSuccess] = useState(false)
 
-    console.log(setlists)
-
     useEffect(() => {
     async function createPlaylist(){
         if (createSpotifyPlaylist) {
             toggleLoading(true)
         try{
-            const {data} = await axios.post(`https://api.spotify.com/v1/users/${userID}/playlists?`,
+            const {data} = await axios.post(`https://api.spotify.com/v1/users/${spotifyData.userID}/playlists?`,
                 {
                 name: setlists[index].setlistName,
                 description: "Setlist Manager created playlist",
                 public: false
             },{
                 headers:{
-                    "Authorization": `Bearer ${spotifyToken.token}`,
+                    "Authorization": `Bearer ${spotifyData.token}`,
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                     },
                 json: true
             } )
             setPlaylistID(data.id)
-            console.log(data.id)
+            toggleError({
+                ...error,
+                createPlaylistError: false
+            })
         } catch(e){
-            console.error(e.response.data.error)
+            toggleError({
+                ...error,
+                createPlaylistError: true
+            })
         }
     }}
         createPlaylist()
     }, [createSpotifyPlaylist])
-
-
 
     useEffect(() => {
         const lastSongIndex = setlists[index].setlistArray.length - 1
@@ -70,35 +71,28 @@ function OpenSetlist({index, toggleOpenSetlist}){
                     const data = await axios.post(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${playlistUris}`,
                         {},
                         {headers: {
-                                "Authorization": `Bearer ${spotifyToken.token}`,
+                                "Authorization": `Bearer ${spotifyData.token}`,
                                 "Accept": "application/json",
                                 "Content-Type": "application/json"
                             },
                             json: true}
                             )
-                    console.log(data.status)
                     if (data.status === 201){
                         toggleLoading(false)
                         toggleSuccess(true)
                     }
+                    toggleError({
+                        ...error,
+                        createPlaylistError: false
+                    })
                 } catch(e){
-                    console.error(e.response.data.error)
+                    toggleError({
+                        ...error,
+                        createPlaylistError: true
+                    })
                 }
             }} addSongsToPlaylist()
     }, [playlistID])
-
-
-    function handlePlay(sendTrackUri){
-        if (trackUri){
-            setTrackUri('')
-            setTrackUri(sendTrackUri)
-            playPause()
-        }
-        else {
-            setTrackUri(sendTrackUri)
-            playPause()
-        }
-    }
 
     return(
         <div className="open-setlist--div">
@@ -114,24 +108,24 @@ function OpenSetlist({index, toggleOpenSetlist}){
           </header>
           <main className="open-setlist--main">
               <ol className="open-setlist--ol">
-                {setlists[index].setlistArray.map((songArray, index) => {
+                {React.Children.toArray(
+                    setlists[index].setlistArray.map((songArray, index) => {
                     if(songArray.track){
                         return <li
-                            key={index}
                             className="open-setlist--li"
                         >
                             {index + 1}. {songArray.track} - {songArray.artist}
-                            {playSong && !loading ?
+                            {spotifyData.playSong && !loading && spotifyData.deviceID ?
                                 <Button
                                     className="setlist-creator--play-pause-button"
                                     buttonText={<img src={pauseButton} alt="play pause button"/>}
-                                    onClick={() => handlePlay(songArray.trackUri)}
+                                    onClick={() => playPause(songArray.trackUri)}
                                 />
                                 :
                                 <Button
                                     className="setlist-creator--play-pause-button"
                                     buttonText={<img src={playButton} alt="play pause button"/>}
-                                    onClick={() => handlePlay(songArray.trackUri)}
+                                    onClick={() => playPause(songArray.trackUri)}
                                 />
                             }
                         </li>
@@ -144,13 +138,21 @@ function OpenSetlist({index, toggleOpenSetlist}){
                         </li>
                     }
                 })
-                }
+                )}
               </ol>
               {success &&
-              <p className="open-setlist--p">
+              <p className="open-setlist--p__success-playlist">
                   A playlist named "{setlists[index].setlistName}" has been created
               </p>
               }
+              <ErrorMessage
+              playError={error.playError}
+              createPlaylistError={error.createPlaylistError}
+              deviceError={error.deviceError}
+              userError={error.userError}
+              spotifyAuthError={error.spotifyAuthError}
+              spotifyRefreshError={error.spotifyRefreshError}
+              />
           </main>
           <footer className="open-setlist--footer">
               {loading ?
@@ -188,10 +190,10 @@ function OpenSetlist({index, toggleOpenSetlist}){
                       />
                   </>
                   :
-                      <Button
-                          className="open-setlist--pdf-button"
-                          buttonText=".pdf"
-                      />
+                  <Button
+                      className="open-setlist--pdf-button"
+                      buttonText=".pdf"
+                  />
               }
           </footer>
         </div>

@@ -22,6 +22,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   flex-direction: column;
   align-items: start;
   padding: 10px;
+  animation: fade-in 1s ease-in;
   .setlist-creator--header {
     display: flex;
     text-shadow: none;
@@ -53,7 +54,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     flex-direction: row;
     justify-content: space-evenly;
     overflow-x: hidden;
-    border-bottom: gray solid 2px;
       .setlist-creator--form {
         width: 100%;
         margin-top: 2%;
@@ -91,7 +91,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
           max-width: inherit;
           .setlist-creator--li {
             border: 1px solid black;
-            background-color: #565656;
+            background-color: #191414;
             display: flex;
             flex-direction: row;
             margin: 1px;
@@ -197,6 +197,8 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: gray solid 2px;
+
   .setlist-creator--finish-button{
     color: white;
     background-color: black;
