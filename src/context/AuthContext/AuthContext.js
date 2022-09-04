@@ -1,8 +1,8 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from 'react'
 import axios from 'axios'
-import jwtDecode from "jwt-decode";
-import {useNavigate} from "react-router-dom";
-import Background from "../../components/Background/Background";
+import jwtDecode from 'jwt-decode'
+import {useNavigate} from 'react-router-dom'
+import Background from '../../components/Background/Background'
 
 export const AuthContext = createContext({})
 
@@ -26,8 +26,8 @@ function AuthContextProvider({children}) {
                         const {data} = await axios.get('https://frontend-educational-backend.herokuapp.com/api/user',
                             {
                                 headers: {
-                                    "Content-Type": "application/json",
-                                    "Authorization": `Bearer ${token}`,
+                                    'ontent-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`,
                                 }
                             })
                         if(data.info){
@@ -56,7 +56,6 @@ function AuthContextProvider({children}) {
                             })
                         }
                     } catch (e) {
-                        console.error(e)
                         setAuthState({
                             ...authState,
                             user:null,
@@ -110,9 +109,9 @@ function AuthContextProvider({children}) {
                 children
             :
             <Background
-                classNameTop="background-top"
-                classNameCenter="background-center"
-                classNameBottom="background-bottom"
+                classNameTop='background-top'
+                classNameCenter='background-center'
+                classNameBottom='background-bottom'
                 centerContent={
                    <h1>Loading</h1>
                 }

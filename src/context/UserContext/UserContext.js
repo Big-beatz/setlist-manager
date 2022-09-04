@@ -1,12 +1,13 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
 import axios from 'axios'
-import querystring from "querystring-es3";
-import {AuthContext} from "../AuthContext/AuthContext";
+import querystring from 'querystring-es3'
+import {AuthContext} from '../AuthContext/AuthContext'
 
 export const UserContext = createContext({})
 
 function UserContextProvider({children}){
     const {authState} = useContext(AuthContext)
+    const [spotifyDenied, toggleSpotifyDenied] = useState(false)
     const [spotifyData, updateSpotifyData] = useState({
         accessCode: '',
         hasToken: false,
@@ -39,11 +40,14 @@ function UserContextProvider({children}){
         const queryString = window.location.search
         const urlParams = new URLSearchParams(queryString)
         const code = urlParams.get('code')
+        const errorCode = urlParams.get('error')
         if (code){
             updateSpotifyData({
                 ...spotifyData,
                 accessCode: code
             })
+        } else if (errorCode){
+            toggleSpotifyDenied(true)
         }
     }
 
@@ -58,14 +62,14 @@ function UserContextProvider({children}){
                 const {data} = await axios.post('https://accounts.spotify.com/api/token',
                     querystring.stringify({
                         code: spotifyData.accessCode,
-                        redirect_uri: "http://localhost:3000/home",
-                        grant_type: "authorization_code",
+                        redirect_uri: 'http://localhost:3000/home',
+                        grant_type: 'authorization_code',
                         client_id: client_id,
                         client_secret: client_secret
                     }),
                     {
                         headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         json: true
                     })
@@ -84,7 +88,6 @@ function UserContextProvider({children}){
                     spotifyAuthError: false
                 })
             } catch (e) {
-                console.error(e)
                 toggleError({
                     ...error,
                     spotifyAuthError: true
@@ -100,18 +103,18 @@ function UserContextProvider({children}){
     }
         async function refreshAuthorizationCode() {
             const currentTime = new Date().getTime().valueOf() / 1000
-            console.log("Ik word uitgevoerd")
+            console.log('Ik word uitgevoerd')
             try {
                 const {data} = await axios.post('https://accounts.spotify.com/api/token',
                     querystring.stringify({
-                        grant_type: "refresh_token",
+                        grant_type: 'refresh_token',
                         refresh_token: spotifyData.refreshToken,
                         client_id: client_id,
                         client_secret: client_secret
                     }),
                     {
                         headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
                         json: true
                     })
@@ -152,10 +155,10 @@ function UserContextProvider({children}){
                 try {
                     const {data} = await axios.get('https://api.spotify.com/v1/me/player/devices', {
                             headers: {
-                                "Authorization": `Bearer ${spotifyData.token}`
+                                'Authorization': `Bearer ${spotifyData.token}`
                             }}
                             )
-                    const findDeviceIndex = data.devices.indexOf("Computer")
+                    const findDeviceIndex = data.devices.indexOf('Computer')
                     updateSpotifyData({
                         ...spotifyData,
                         deviceID: data.devices[findDeviceIndex + 1].id
@@ -178,7 +181,7 @@ function UserContextProvider({children}){
             try{
                 const {data} = await axios.get('https://api.spotify.com/v1/me', {
                     headers: {
-                        "Authorization": `Bearer ${spotifyData.token}`
+                        'Authorization': `Bearer ${spotifyData.token}`
                     }}
                 )
                 updateSpotifyData({
@@ -194,7 +197,6 @@ function UserContextProvider({children}){
                     ...error,
                     userError: true
                 })
-                console.error(e)
             }
         }
         getUserID()
@@ -209,16 +211,16 @@ function UserContextProvider({children}){
                                 querystring.stringify({
                                     device_id: spotifyData.deviceID
                                 })}`, {
-                                "uris": [spotifyData.trackUri],
-                                "offset": {
-                                    "position": 0
+                                'uris': [spotifyData.trackUri],
+                                'offset': {
+                                    'position': 0
                                 },
-                                "position_ms": 0
+                                'position_ms': 0
                             }, {
                                 headers: {
-                                    "Authorization": `Bearer ${spotifyData.token}`,
-                                    "Accept": "application/json",
-                                    "Content-Type": "application/json"
+                                    'Authorization': `Bearer ${spotifyData.token}`,
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
                                 }, json: true
                             }
                         )
@@ -235,7 +237,6 @@ function UserContextProvider({children}){
                             ...spotifyData,
                             playSong: false
                         })
-                        console.error(e.response.data.error)
                     }
                 }play()
             }
@@ -252,9 +253,9 @@ function UserContextProvider({children}){
                             }
                         )}`, {}, {
                         headers: {
-                            "Authorization": `Bearer ${spotifyData.token}`,
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
+                            'Authorization': `Bearer ${spotifyData.token}`,
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
                         }
                     })
                     updateSpotifyData({
@@ -263,7 +264,6 @@ function UserContextProvider({children}){
                         pauseSong: false
                     })
                 } catch (e) {
-                    console.error(e)
                     updateSpotifyData({
                         ...spotifyData,
                         playSong: false,
@@ -292,6 +292,7 @@ function UserContextProvider({children}){
         setlists: setlists,
         updateSetlists: updateSetlists,
         playPause: playPause,
+        spotifyDenied: spotifyDenied,
         spotifyData: spotifyData,
         updateSpotifyData: updateSpotifyData,
         client_id: client_id,

@@ -145,6 +145,68 @@ p{
     color: $blue;
   }
 }
+@keyframes hoverClear {
+  from{
+    background-color: $yellow;
+    color: black;
+  }
+  to{
+    background-color: $red;
+    color: white;
+  }
+}
+
+@keyframes hoverDelete {
+  from{
+    border: solid 5px white;
+  }
+  to{
+    border: solid 5px black;
+
+  }
+}
+@keyframes hoverFinish {
+  from{
+    background-color: black;
+    color: white;
+  }
+  to{
+    background-color: white;
+    color: black;
+  }
+}
+
+@keyframes hoverOpenSetlist {
+  from{
+    background-color: white;
+    color: black;
+  }
+  to{
+    background-color: black;
+    color: white;
+  }
+}
+@keyframes hoverDeleteSetlist {
+  from{
+    background-color: white;
+    color: $red;
+  }
+  to{
+    background-color: $red;
+    color: white;
+  }
+}
+
+@keyframes hoverCreatePlaylist {
+  from{
+    background-color: #1DB954;
+    color: white;
+  }
+  to{
+    background-color: white;
+    color: #1DB954;
+  }
+}
 @keyframes fade-in{
   from {
     opacity: 0;
@@ -186,6 +248,14 @@ p{
   }
   to{
     height: 60%;
+  }
+}
+@keyframes renderOutContentProfile{
+  from{
+    height: 60%;
+  }
+  to{
+    height: 0%;
   }
 }
 

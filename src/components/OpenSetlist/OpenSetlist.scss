@@ -33,10 +33,15 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     justify-content: space-between;
     border-bottom: gray solid 2px;
     .open-setlist--close-button{
-      padding-right: 20px;
       background: white;
       font-size: 130%;
-      border: none;
+      border: white solid 5px;
+      border-radius: 7px;
+      padding: 5px;
+      &:hover{
+        border: black solid 5px;
+        animation: hoverDelete 0.5s ease-in;
+      }
     }
   }
   .open-setlist--main {
@@ -83,20 +88,14 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   .open-setlist--footer{
     padding: 5px;
     display: flex;
+    text-shadow: none;
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-    .open-setlist--pdf-button{
+    .footer-logo{
       font-family: $fascinate;
-      background-color: $red;
-      border: $red 5px solid;
-      border-radius: 7px;
-      color: white;
-      font-size: 140%;
-      &:hover{
-        background-color: white;
-        color: $red;
-      }
+      color: $red;
+      font-size: 75%;
     }
     .open-setlist--pdf-button-disabled{
       font-family: $fascinate;
@@ -116,6 +115,8 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       &:hover{
         background-color: white;
         color: #1DB954;
+        animation: hoverCreatePlaylist 0.5s ease-in;
+
       }
     }
     .open-setlist--playlist-button-disabled{

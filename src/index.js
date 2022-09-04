@@ -4,11 +4,11 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom'
-import UserContextProvider from "./context/UserContext/UserContext";
-import AuthContextProvider from "./context/AuthContext/AuthContext";
+import UserContextProvider from './context/UserContext/UserContext'
+import AuthContextProvider from './context/AuthContext/AuthContext'
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Router>
       <React.StrictMode>
@@ -19,6 +19,6 @@ root.render(
           </AuthContextProvider>
       </React.StrictMode>
     </Router>
-);
+)
 
-reportWebVitals();
+reportWebVitals()

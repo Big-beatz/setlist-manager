@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './MySetlists.scss'
-import Background from "../../components/Background/Background";
-import {Button, MySetlistsButton, NewSetlistButton, ProfileButton} from "../../components/Button/Button";
-import {useNavigate} from "react-router-dom";
-import {UserContext} from "../../context/UserContext/UserContext";
-import OpenSetlist from "../../components/OpenSetlist/OpenSetlist";
-import {AuthContext} from "../../context/AuthContext/AuthContext";
+import Background from '../../components/Background/Background'
+import {Button, MySetlistsButton, NewSetlistButton, ProfileButton} from '../../components/Button/Button'
+import {useNavigate} from 'react-router-dom'
+import {UserContext} from '../../context/UserContext/UserContext'
+import OpenSetlist from '../../components/OpenSetlist/OpenSetlist'
+import {AuthContext} from '../../context/AuthContext/AuthContext'
 import spotifyIcon from '../../assets/icons/Spotify_logo_without_text.svg.png'
-import axios from "axios";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import axios from 'axios'
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage'
 
 function MySetlists(){
     const navigate = useNavigate()
@@ -53,8 +53,8 @@ function MySetlists(){
                             info: jsonStringSetlists
                         }, {
                         headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
                         }
                     })
                     setAuthState({
@@ -77,7 +77,6 @@ function MySetlists(){
                         ...error,
                         updateAuthInfoError: true
                     })
-                    console.error(e)
                 }
             }updateSetlists()
         }
@@ -98,14 +97,14 @@ function MySetlists(){
 
     return(
         <Background
-            classNameTop="background-top"
+            classNameTop='background-top'
             classNameCenter={className.background}
-            classNameBottom="background-bottom"
+            classNameBottom='background-bottom'
             topContent={
                 <div className={className.navigationButton}>
                     <ProfileButton
                         onClick={() => {
-                            handleNavigationButton("/profile")
+                            handleNavigationButton('/profile')
                         }}
                     />
                 </div>
@@ -120,10 +119,10 @@ function MySetlists(){
                         />
                         :
                         <>
-                            <div className="my-setlists--header">
+                            <div className='my-setlists--header'>
                                 <MySetlistsButton
                                     onClick={() => {
-                                        handleNavigationButton("/home")
+                                        handleNavigationButton('/home')
                                     }}
                                 />
                             </div>
@@ -136,20 +135,21 @@ function MySetlists(){
                         </>
                             }
                         <div className={className.render}>
-                            <div className="my-setlists--div">
+                            <div className='my-setlists--div'>
                                 {setlists.length < 1 ?
-                                    <section className="my-setlists--section">
+                                    <section className='my-setlists--section'>
                                         <p>There are no setlists yet. </p>
                                         <p>Go to New Setlist and make a setlist</p>
                                     </section>
                                     :
                                     <>
-                                        {setlists.map((setlist, index) => {
+                                    {React.Children.toArray(
+                                        setlists.map((setlist, index) => {
                                             return (
-                                                <section className="my-setlists--section">
-                                    <span className="my-setlists--buttons">
+                                                <section className='my-setlists--section'>
+                                    <span className='my-setlists--buttons'>
                                         <Button
-                                            className="my-setlists--open-button"
+                                            className='my-setlists--open-button'
                                             onClick={() => toggleOpenSetlist({
                                                 open: true,
                                                 nameOfSetlist: setlist.setlistName,
@@ -158,12 +158,12 @@ function MySetlists(){
                                             buttonText={setlist.setlistName}
                                         />
                                         <Button
-                                            buttonText="Delete"
-                                            className="my-setlists--delete-button"
+                                            buttonText='Delete'
+                                            className='my-setlists--delete-button'
                                             onClick={() => deleteButtonHandler(index)}
                                         />
                                     </span>
-                                    <span className="my-setlists--span">
+                                    <span className='my-setlists--span'>
                                         <ol>
                                         {React.Children.toArray(
                                             setlist.setlistArray.slice(0, 3).map((setlistPreview) => {
@@ -180,14 +180,14 @@ function MySetlists(){
                                         )}
                                         </ol>
                                             {setlist.useSpotify &&
-                                            <img src={spotifyIcon} alt="Spotify Icon"
-                                                 className="my-setlists--img"
+                                            <img src={spotifyIcon} alt='Spotify Icon'
+                                                 className='my-setlists--img'
                                             />
                                             }
                                     </span>
                                 </section>
                                             )
-                                        })}
+                                        }))}
                                     </>
                                 }
                             </div>

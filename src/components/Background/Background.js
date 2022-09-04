@@ -11,7 +11,7 @@ function Background({
                 })
 {
     return(
-            <div className="background">
+            <div className='background'>
                 <div className={classNameTop}>
                     {topContent}
                 </div>

@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './Profile.scss'
-import Background from "../../components/Background/Background";
-import {Button, MySetlistsButton, NewSetlistButton, ProfileButton} from "../../components/Button/Button";
-import {useNavigate} from "react-router-dom";
-import {AuthContext} from "../../context/AuthContext/AuthContext";
+import Background from '../../components/Background/Background'
+import {Button, MySetlistsButton, NewSetlistButton, ProfileButton} from '../../components/Button/Button'
+import {useNavigate} from 'react-router-dom'
+import {AuthContext} from '../../context/AuthContext/AuthContext'
 
 function Profile() {
     const {authState, logout} = useContext(AuthContext)
@@ -28,7 +28,7 @@ function Profile() {
         setClassName({
             ...className,
             background: 'background-top__large-shrink',
-            fade:'profile__fade-out',
+            fade: 'profile__fade-out',
             render: 'profile--div__render-out',
             navigationButton: 'navigation--fade-out'
         })
@@ -40,39 +40,41 @@ function Profile() {
     return (
         <Background
             classNameTop={className.background}
-            classNameCenter="background-center"
-            classNameBottom="background-bottom"
+            classNameCenter='background-center'
+            classNameBottom='background-bottom'
             topContent={
                 <div className={className.fade}>
-                    <ProfileButton
-                        onClick={() => {
-                           handleNavigationButton('/home')
-                        }}
-                    />
+                    <div className={className.navigationButton}>
+                        <ProfileButton
+                            onClick={() => {
+                                handleNavigationButton('/home')
+                            }}
+                        />
+                    </div>
                     <div className={className.render}>
-                            <div className="profile--div__username">
-                                <h2 className="profile--h2">
+                            <div className='profile--div__username'>
+                                <h2 className='profile--h2'>
                                     Username:
                                 </h2>
                                 <br/>
-                                <p className="profile--p">
+                                <p className='profile--p'>
                                     {authState.user.username}
                                 </p>
                             </div>
-                            <div className="profile--div__mailadres">
-                                <h2 className="profile--h2">
+                            <div className='profile--div__mailadres'>
+                                <h2 className='profile--h2'>
                                     Mailadres:
                                 </h2>
                                 <br/>
-                                <p className="profile--p">
+                                <p className='profile--p'>
                                     {authState.user.mail}
                                 </p>
                             </div>
                             <Button
-                                className="logoutButton"
-                                type="button"
+                                className='logoutButton'
+                                type='button'
                                 onClick={logout}
-                                buttonText="Logout"
+                                buttonText='Logout'
                             />
                     </div>
                 </div>

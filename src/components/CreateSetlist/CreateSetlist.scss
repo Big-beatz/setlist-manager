@@ -44,7 +44,12 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     .setlist-creator--close {
       background: white;
       font-size: 130%;
-      border: none;
+      border: white 5px solid;
+      border-radius: 7px;
+      &:hover{
+        border: black 5px solid;
+        animation: hoverDelete 0.5s ease-in;
+      }
     }
   }
   .setlist-creator--main {
@@ -118,8 +123,6 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
     .setlist-creator--clear-setlist {
       background: $yellow;
-      border: $red solid 2px;
-      color: black;
       font-family: $fahkwang;
       border-radius: 7px;
       width: 30%;
@@ -128,13 +131,11 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
       &:hover {
         background-color: $red;
         color: white;
-        border: black solid 2px;
+        animation: hoverClear 0.5s ease-in;
       }
     }
     .setlist-creator--clear-setlist__disabled {
       background: $yellow;
-      border: $red solid 2px;
-      color: black;
       font-family: $fahkwang;
       border-radius: 7px;
       filter: blur(1px);
@@ -160,7 +161,7 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
         color: red;
       }
       .setlist-creator--li {
-        margin-top: 5px;
+        padding-top: 5px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -169,10 +170,21 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
         .setlist-creator--button-div {
           display: flex;
           flex-direction: row;
+          margin-bottom: 2px;
+        }
+        .setlist-creator--delete-button-container {
+          border-radius: 7px;
+          border: solid 5px white;
+          max-height: 25px;
+          margin: 3px;
+          &:hover {
+            border: solid 5px black;
+            animation: hoverDelete 0.5s ease-in;
+          }
           .setlist-creator--delete-button {
-            max-height: 25px;
             background: white;
-            font-size: 130%;
+            font-size: 100%;
+            font-weight: bold;
             border: none;
           }
         }
@@ -198,11 +210,10 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   justify-content: center;
   align-items: center;
   border-top: gray solid 2px;
-
+  padding-top: 10px;
   .setlist-creator--finish-button{
     color: white;
     background-color: black;
-    margin-top: 2%;
     font-family: $fascinate;
     font-size: 180%;
     text-shadow: $content-lining;
@@ -213,12 +224,12 @@ $content-lining: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     &:hover{
       color: black;
       background-color: white;
+      animation: hoverFinish 0.5s ease-in;
     }
   }
   .setlist-creator--finish-button__disabled {
     color: white;
     background-color: black;
-    margin-top: 2%;
     font-family: $fascinate;
     font-size: 180%;
     text-shadow: $content-lining;

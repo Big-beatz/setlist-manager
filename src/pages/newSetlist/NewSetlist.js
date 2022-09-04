@@ -1,17 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './NewSetlist.scss'
-import Background from "../../components/Background/Background";
+import Background from '../../components/Background/Background'
 import {
     Button,
     DisabledButton,
     MySetlistsButton,
     NewSetlistButton,
     ProfileButton
-} from "../../components/Button/Button";
-import {useNavigate} from "react-router-dom";
-import {UserContext} from "../../context/UserContext/UserContext";
-import CreateSetlist from "../../components/CreateSetlist/CreateSetlist";
-import {AuthContext} from "../../context/AuthContext/AuthContext";
+} from '../../components/Button/Button'
+import {useNavigate} from 'react-router-dom'
+import {UserContext} from '../../context/UserContext/UserContext'
+import CreateSetlist from '../../components/CreateSetlist/CreateSetlist'
+import {AuthContext} from '../../context/AuthContext/AuthContext'
 import spotifyIcon from '../../assets/icons/Spotify_logo_without_text.svg.png'
 
 function NewSetlist(){
@@ -59,14 +59,14 @@ function NewSetlist(){
 
     return(
     <Background
-        classNameTop="background-top"
-        classNameCenter="background-center"
+        classNameTop='ackground-top'
+        classNameCenter='background-center'
         classNameBottom={className.background}
         topContent={
             <div className={className.navigationButton}>
                 <ProfileButton
                     onClick={() => {
-                        handleNavigationButton("/profile")
+                        handleNavigationButton('/profile')
                     }}
                 />
             </div>
@@ -75,7 +75,7 @@ function NewSetlist(){
             <div className={className.navigationButton}>
                 <MySetlistsButton
                     onClick={() => {
-                        handleNavigationButton("/my-setlists")
+                        handleNavigationButton('/my-setlists')
 
                     }}
 
@@ -92,7 +92,7 @@ function NewSetlist(){
                     <div className={className.navigationButton}>
                         <NewSetlistButton
                             onClick={() => {
-                                handleNavigationButton("/home")
+                                handleNavigationButton('/home')
                             }}
 
                         />
@@ -100,34 +100,34 @@ function NewSetlist(){
                     <div className={className.render}>
                         {setlists.length < 6 ?
                             <form
-                                className="new-setlist--form"
+                                className='new-setlist--form'
                                 onSubmit={handleSubmit}
                             >
                                 <legend
-                                    className="new-setlist--legend"
+                                    className='new-setlist--legend'
                                 >
                                     Do you want to use Spotify?
                                     <img
-                                        className="new-setlist--img"
+                                        className='new-setlist--img'
                                         src={spotifyIcon}
-                                        alt="Spotify Icon"
+                                        alt='Spotify Icon'
                                     />
                                 </legend>
-                                <div className="new-setlist-radio">
-                                    <label htmlFor="useSpotify">
+                                <div className='new-setlist-radio'>
+                                    <label htmlFor='useSpotify'>
                                         <input
-                                            type="radio"
-                                            name="useSpotify"
-                                            id="useSpotify"
+                                            type='radio'
+                                            name='useSpotify'
+                                            id='useSpotify'
                                             onClick={() => setUseSpotify(true)}
                                         />
                                         Yes
                                     </label>
-                                    <label htmlFor="dontUseSpotify">
+                                    <label htmlFor='dontUseSpotify'>
                                         <input
-                                            type="radio"
-                                            id="dontUseSpotify"
-                                            name="useSpotify"
+                                            type='radio'
+                                            id='dontUseSpotify'
+                                            name='useSpotify'
                                             onClick={() => setUseSpotify(false)}
                                         />
                                         No
@@ -135,19 +135,19 @@ function NewSetlist(){
                                 </div>
                                 {useSpotify === false || useSpotify === true ?
                                     <Button
-                                        className="new-setlist--submit"
-                                        type="submit"
-                                        buttonText="Create Setlist"
+                                        className='new-setlist--submit'
+                                        type='submit'
+                                        buttonText='Create Setlist'
                                     />
                                     :
                                     <DisabledButton
-                                        className="new-setlist--disabled"
-                                        buttonText="Create Setlist"
+                                        className='new-setlist--disabled'
+                                        buttonText='Create Setlist'
                                     />
                                 }
                             </form>
                             :
-                            <div className="new-setlist--maximum">
+                            <div className='new-setlist--maximum'>
                                 <h1>Oops</h1>
                                 <br/>
                                 <p>The maximum number of setlists has been reached.</p>

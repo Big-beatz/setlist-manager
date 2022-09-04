@@ -1,13 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './CreateSetlist.scss'
-import {Button, DisabledButton} from "../Button/Button";
-import {UserContext} from "../../context/UserContext/UserContext";
-import {AuthContext} from "../../context/AuthContext/AuthContext";
-import axios from "axios";
-import querystring from "querystring-es3";
+import {Button, DisabledButton} from '../Button/Button'
+import {UserContext} from '../../context/UserContext/UserContext'
+import {AuthContext} from '../../context/AuthContext/AuthContext'
+import axios from 'axios'
+import querystring from 'querystring-es3'
 import playButton from '../../assets/icons/play-button-icon-png-18917.jpg'
 import pauseButton from '../../assets/icons/61039.png'
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 function CreateSetlist({toggleCreateSetlist}){
     const {token, setAuthState, authState} = useContext(AuthContext)
@@ -41,13 +41,13 @@ function CreateSetlist({toggleCreateSetlist}){
                         const {data: {tracks: {items}}} = await axios.get(`https://api.spotify.com/v1/search?${
                             querystring.stringify({
                                 q: newSong,
-                                type: "track,artist",
+                                type: 'track,artist',
                                 limit: 5,
-                                market: "NL"
+                                market: 'NL'
                             })}`, {
                             headers: {
-                                "Authorization": `Bearer ${spotifyData.token}`,
-                                "Content-Type": "application/x-www-form-urlencoded"
+                                'Authorization': `Bearer ${spotifyData.token}`,
+                                'Content-Type': 'application/x-www-form-urlencoded'
                             },
                             json: true
                         })
@@ -61,7 +61,6 @@ function CreateSetlist({toggleCreateSetlist}){
                             ...error,
                             searchError: true
                         })
-                        console.error(e.response.data.error)
                     }
                 }
             }
@@ -132,11 +131,10 @@ function CreateSetlist({toggleCreateSetlist}){
                             info: jsonStringSetlists
                         }, {
                             headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`,
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`,
                             }
                         })
-                    console.log(data)
                     setAuthState({
                         ...authState,
                         user: {
@@ -151,52 +149,51 @@ function CreateSetlist({toggleCreateSetlist}){
                     toggleFinish(false)
                     close()
                 } catch (e) {
-                    console.error(e)
                 }
             }
         }updateUserInfo()
     },[finish])
 
     return(
-        <div className="setlist-creator">
-            <header className="setlist-creator--header">
+        <div className='setlist-creator'>
+            <header className='setlist-creator--header'>
                 <input
-                    className="setlist-creator--title-input"
-                    type="text"
-                    id="setlist-name"
-                    placeholder="Give me a name"
+                    className='setlist-creator--title-input'
+                    type='text'
+                    id='setlist-name'
+                    placeholder='Give me a name'
                     value={nameOfSetlist}
                     onChange={e => setNameOfSetlist(e.target.value)}
                 />
                 <Button
                     onClick={close}
-                    type="button"
-                    className="setlist-creator--close"
-                    buttonText="X"
+                    type='button'
+                    className='setlist-creator--close'
+                    buttonText='X'
                 />
             </header>
-            <main className="setlist-creator--main">
+            <main className='setlist-creator--main'>
                     <form
-                        className="setlist-creator--form"
+                        className='setlist-creator--form'
                         onSubmit={pushToSongsArray}
                     >
-                        <div className="setlist-creator--search-result-div">
+                        <div className='setlist-creator--search-result-div'>
                             {useSpotify ?
                             <input
-                                className="setlist-creator--search-input"
-                                type="text"
+                                className='setlist-creator--search-input'
+                                type='text'
                                 value={newSong}
                                 onChange={e => setNewSong(e.target.value)}
                             />
                             :
-                            <div className="setlist-creator--div">
+                            <div className='setlist-creator--div'>
                                 <Button
-                                    className="setlist-creator--add-button"
-                                    buttonText="Add"
+                                    className='setlist-creator--add-button'
+                                    buttonText='Add'
                                 />
                                 <input
-                                    className="setlist-creator--input"
-                                    type="text"
+                                    className='setlist-creator--input'
+                                    type='text'
                                     value={newSong}
                                     onChange={e => setNewSong(e.target.value)}
                                 />
@@ -204,26 +201,24 @@ function CreateSetlist({toggleCreateSetlist}){
                             }
                             {useSpotify &&
                             <div>
-                                <ul
-                                    className="setlist-creator--ul"
-                                >
+                                <ul className='setlist-creator--ul'>
                                     {newSong.length >= 1 &&
                                         React.Children.toArray(
                                         searchResults.map((result) => {
                                         return <li
-                                            className="setlist-creator--li"
+                                            className='setlist-creator--li'
                                             onClick={() =>
                                                 pushToSpotifyArray(result.name, result.artists[0].name, result.uri)}
                                         >
                                             <img src={result.album.images[0].url}
-                                                 alt="album image"
-                                                 className="setlist-creator--img"
+                                                 alt='album image'
+                                                 className='setlist-creator--img'
                                             />
                                             <div>
-                                                <p className="setlist-creator--result-track">
+                                                <p className='setlist-creator--result-track'>
                                                     {result.name}
                                                 </p>
-                                                <p className="setlist-creator--result-artist">
+                                                <p className='setlist-creator--result-artist'>
                                                     {result.artists[0].name}
                                                 </p>
                                             </div>
@@ -235,26 +230,24 @@ function CreateSetlist({toggleCreateSetlist}){
                             }
                         </div>
                     </form>
-                    <div className="setlist-creator--right-column">
+                    <div className='setlist-creator--right-column'>
                     { songsArray.length === 0 ?
                         <DisabledButton
-                            buttonText="Clear all"
-                            className="setlist-creator--clear-setlist__disabled"
+                            buttonText='Clear'
+                            className='setlist-creator--clear-setlist__disabled'
                         />
                         :
                         <Button
-                            type="button"
+                            type='button'
                             onClick={() => updateSongsArray([])}
-                            buttonText="Clear all"
-                            className="setlist-creator--clear-setlist"
+                            buttonText='Clear'
+                            className='setlist-creator--clear-setlist'
                         />
                     }
                         <ol className ="setlist-creator--ol">
                             {invalidInput &&
                                 <>
-                                    <p
-                                        className="setlist-creator--invalid-entry"
-                                    >
+                                    <p className='setlist-creator--invalid-entry'>
                                         Input can't start with a space
                                     </p>
                                     <br/>
@@ -264,49 +257,57 @@ function CreateSetlist({toggleCreateSetlist}){
                                 songsArray.map((songArray, index) => {
                                     if (useSpotify) {
                                         return <li
-                                            className="setlist-creator--li"
+                                            className='setlist-creator--li'
                                             key={songArray.trackUri}
                                         >
                                             {index + 1}. {songArray.track} - {songArray.artist}
-                                            <div
-                                                className="setlist-creator--button-div"
-                                            >
-                                                {spotifyData.playSong === true && spotifyData.deviceID ?
-                                                    <Button
-                                                        className="setlist-creator--play-pause-button"
-                                                        buttonText={<img src={pauseButton} alt="play pause button"/>}
-                                                        onClick={() => playPause(songArray.trackUri)}
-                                                    />
-                                                    :
-                                                    <Button
-                                                        className="setlist-creator--play-pause-button"
-                                                        buttonText={<img src={playButton} alt="play pause button"/>}
-                                                        onClick={() => playPause(songArray.trackUri)}
-                                                    />
+                                            <div className='setlist-creator--button-div'>
+                                                {spotifyData.deviceID &&
+                                                    <>
+                                                    {
+                                                    spotifyData.playSong ?
+                                                        <Button
+                                                            className='setlist-creator--play-pause-button'
+                                                            buttonText={<img src={pauseButton}
+                                                                             alt='play pause button'/>}
+                                                            onClick={() => playPause(songArray.trackUri)}
+                                                        />
+                                                        :
+                                                        <Button
+                                                            className='setlist-creator--play-pause-button'
+                                                            buttonText={<img src={playButton} alt='play pause button'/>}
+                                                            onClick={() => playPause(songArray.trackUri)}
+                                                        />
                                                 }
-                                                <Button
-                                                    className="setlist-creator--delete-button"
-                                                    type="button"
-                                                    onClick={() => {
-                                                        deleteButtonHandler(index)
-                                                    }}
-                                                    buttonText="X"
-                                                />
+                                                </>
+                                                }
+                                                <div className='setlist-creator--delete-button-container'>
+                                                    <Button
+                                                        className='setlist-creator--delete-button'
+                                                        type='button'
+                                                        onClick={() => {
+                                                            deleteButtonHandler(index)
+                                                        }}
+                                                        buttonText='X'
+                                                    />
+                                                </div>
                                             </div>
                                         </li>
                                     } else {
                                         return <li
-                                            className="setlist-creator--li"
+                                            className='setlist-creator--li'
                                         >
                                             {index + 1}. {songArray}
-                                            <Button
-                                                className="setlist-creator--delete-button"
-                                                type="button"
-                                                onClick={() => {
-                                                    deleteButtonHandler(index)
-                                                }}
-                                                buttonText="X"
-                                            />
+                                            <div className='setlist-creator--delete-button-container'>
+                                                <Button
+                                                    className='setlist-creator--delete-button'
+                                                    type='button'
+                                                    onClick={() => {
+                                                        deleteButtonHandler(index)
+                                                    }}
+                                                    buttonText='X'
+                                                />
+                                            </div>
                                         </li>
                                     }
                                 })
@@ -314,25 +315,27 @@ function CreateSetlist({toggleCreateSetlist}){
                         </ol>
                     </div>
             </main>
-            <ErrorMessage
-                playError={error.playError}
-                deviceError={error.deviceError}
-                userError={error.userError}
-                spotifyAuthError={error.spotifyAuthError}
-                spotifyRefreshError={error.spotifyRefreshError}
-                searchError={error.searchError}
-            />
-            <footer className="setlist-creator--footer">
+            {useSpotify &&
+                <ErrorMessage
+                    playError={error.playError}
+                    deviceError={error.deviceError}
+                    userError={error.userError}
+                    spotifyAuthError={error.spotifyAuthError}
+                    spotifyRefreshError={error.spotifyRefreshError}
+                    searchError={error.searchError}
+                />
+            }
+            <footer className='setlist-creator--footer'>
                 {songsArray.length === 0 || nameOfSetlist.length === 0 ?
                     <DisabledButton
-                        buttonText="Finish"
-                        className="setlist-creator--finish-button__disabled"
+                        buttonText='Finish'
+                        className='setlist-creator--finish-button__disabled'
                     />
                     :
                     <Button
-                        type="button"
-                        className="setlist-creator--finish-button"
-                        buttonText="Finish"
+                        type='button'
+                        className='setlist-creator--finish-button'
+                        buttonText='Finish'
                         onClick={finishButton}
                     />
                 }

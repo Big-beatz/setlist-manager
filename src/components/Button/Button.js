@@ -31,10 +31,10 @@ export function DisabledButton({className, type, onClick, buttonText}){
 export function ProfileButton({onClick}){
     return(
         <Button
-        type="button"
-        className="profile-button"
+        type='button'
+        className='profile-button'
         onClick={onClick}
-        buttonText="Profile"
+        buttonText='Profile'
     />
     )
 }
@@ -42,10 +42,10 @@ export function ProfileButton({onClick}){
 export function MySetlistsButton({onClick}){
     return(
         <Button
-            type="button"
-            className="my-setlists-button"
+            type='button'
+            className='my-setlists-button'
             onClick={onClick}
-            buttonText="My setlists"
+            buttonText='My setlists'
         />
 
     )
@@ -54,10 +54,10 @@ export function MySetlistsButton({onClick}){
 export function NewSetlistButton({onClick}){
     return(
         <Button
-            type="button"
+            type='button'
             onClick={onClick}
-            className="new-setlist-button"
-            buttonText="New Setlist"
+            className='new-setlist-button'
+            buttonText='New Setlist'
         />
     )
 }
