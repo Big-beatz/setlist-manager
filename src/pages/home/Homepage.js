@@ -80,9 +80,9 @@ function Homepage(){
                         centerContent={
                         <>
                             {spotifyDenied ?
-                                <div className='HomePage-spotifyDenied'>
+                                <div className='homePage-spotifyDenied'>
                                     <h1>
-                                        In order to make use of Setlist Manager, please log in to spotify.
+                                        In order to make use of Setlist Manager, please agree to the usage your spotify data.
                                     </h1>
                                     <p>You will be redirected to the login page.</p>
                                 </div>

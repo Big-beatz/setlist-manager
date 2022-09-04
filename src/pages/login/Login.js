@@ -23,7 +23,7 @@ useEffect(() => {
         if(startup) {
             setTimeout(() => {
             toggleStartup(false)
-        }, 1900)
+        }, 2000)
         }
     async function contactBackend(){
         try{

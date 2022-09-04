@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6{
   font-family: 'Fascinate', sans-serif;
   margin: 0px;
   padding: 0px;
+  text-shadow: $content-lining;
 }
 
 p{
@@ -227,18 +228,16 @@ p{
 @keyframes startup-logo {
   0% {
     color: $yellow;
-    text-shadow: $header-lining, $yellow-shadow;
     font-size: large;
   }
   50% {
     color: $red;
-    text-shadow: $header-lining, $yellow-shadow;
     font-size: xx-large;
   }
+
   100% {
-    color: $yellow;
-    text-shadow: none;
-    font-size: large;
+    color: $red;
+    font-size: x-large;
   }
 }
 
