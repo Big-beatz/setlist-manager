@@ -59,7 +59,7 @@ function NewSetlist(){
 
     return(
     <Background
-        classNameTop='ackground-top'
+        classNameTop='background-top'
         classNameCenter='background-center'
         classNameBottom={className.background}
         topContent={

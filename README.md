@@ -56,8 +56,10 @@ Setlist Manager features several functions as of now to help you make your own s
     When the setlist has been created you can view your setlist in the **My Selists** section.
     If you used the *searchquery* to add your songs a Spotify icon should appear in the right bottom corner of the setlist. 
     Open these setlists by clicking on the name of the setlist and a green *Create Playlist* button should present itself.
-    By pushing this button a new playlist will be added within your spotify client. 
-    
+    By pushing this button a new playlist will be added within your spotify client.
+    The amount of setlists that can be created is as of now limited to 6. 
+  
+
 ###Future Features
 Below will be a list of features that did not make it into the application yet due to time restrictions. Nevertheless I'd like to add them in later iterations of this project. 
 * ####*Adding Notes to each song*
@@ -75,8 +77,14 @@ Below will be a list of features that did not make it into the application yet d
     Creating groups with different users would make it easier to share setlists with each other, see each others notes and share drafts for setlists. 
 * ####*Personalize the background* 
     Everybody has his/her own sense of style. Being able to personalize the application would encourage the pleasure of using Setlist Manager.
+* ####*Styling for phone and tablet*
+    Due to time constraints the styling has not been optimized for phone and tablet. The optimal setting for this application when it is finished would be on tablet.
 
 ###Installation Guide
+1. extract the files of the .zip to a new directory.
+2. Open the 
+3.
+4.
 
 
 ### Dependencies
