@@ -82,7 +82,7 @@ Below will be a list of features that did not make it into the application yet d
     Due to time constraints the styling has not been optimized for phone and tablet. The optimal setting for this application when it is finished would be on tablet.
 
 ###Installation Guide
-1. Extract the 'setlist_manager_v1.0' file folder to your computer.
+1. Unzip 'setlist_manager.zip' and extract the 'setlist_manager_v1.0' file folder to your computer.
 2. Open the extracted setlist_manager_v1.0 with you IDE.
 3. In your IDE create a new file called .env in your main folder. This should appear above the file called .env.dist
 4. Open the 'Setlist-Manager-Locked.zip'
